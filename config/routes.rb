@@ -1,24 +1,19 @@
 ActionController::Routing::Routes.draw do |map|
-
-  map.devise_for :admins
+  map.devise_for :users
   
-  map.devise_for :jurors
-
-  map.resources :submissions, :has_many => [:works]
-    
+  map.resources :types
+  
   map.resources :works
 
-  map.resources :types
-
-  map.resources :applicants, :has_many => [:submissions]
+  map.resources :programs do |program|
+  	program.resources :applicants, :shallow => true do |applicant|
+  		applicant.resources :submissions, :shallow => true
+  	end
+  end
   
-  map.resources :programs, :has_many => [:applicants, :submissions]
+  map.connect 'programs/:id/guidelines', :controller => 'programs', :action => 'guidelines'
   
   map.root :programs
-  
-  map.connect ':url', :controller => 'programs', :action => 'named'
-  
-  map.connect ':url/guidelines', :controller => 'programs', :action => 'guidelines'
   
   # The priority is based upon order of creation: first created -> highest priority.
 

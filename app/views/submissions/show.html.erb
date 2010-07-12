@@ -2,7 +2,7 @@
 
 <p>
   <strong>Applicant:</strong>
-  <%=h @submission.applicant_id %>
+  <%=h @submission.applicant.firstname + " " + @submission.applicant.lastname %>
 </p>
 <p>
   <strong>Statement:</strong>
@@ -12,5 +12,5 @@
 <p>
   <%= link_to "Edit", edit_submission_path(@submission) %> |
   <%= link_to "Destroy", @submission, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", submissions_path %>
+  <%= link_to "View All", applicant_submissions_path(@submission.applicant_id) %>
 </p>

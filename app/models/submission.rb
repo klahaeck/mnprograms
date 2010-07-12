@@ -7,5 +7,4 @@ class Submission < ActiveRecord::Base
   validates_presence_of :statement
   
   accepts_nested_attributes_for :works
-  
 end

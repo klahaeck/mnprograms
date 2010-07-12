@@ -1,6 +1,6 @@
 class ProgramsController < ApplicationController
 
-  before_filter :authenticate_admin!, :except => [:named, :guidelines, :index, :show]
+  before_filter :authenticate_user!, :except => [:named, :guidelines, :index, :show]
  
   def index
     @programs = Program.all
@@ -49,21 +49,11 @@ class ProgramsController < ApplicationController
     redirect_to programs_url
   end
   
-  def named
-    @program = Program.find_by_url(params[:url])
-    if @program
-     #render :action => 'show'
-    else
-     redirect_to '/404.html'
-    end
-  end
-  
   def guidelines
-    @program = Program.find_by_url(params[:url])
-    if @program
-     #render :action => 'show'
-    else
-     redirect_to '/404.html'
+  	@program = Program.find(params[:id])
+  	
+    respond_to do |format|
+       format.html
     end
   end
   

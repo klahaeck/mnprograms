@@ -1,13 +1,7 @@
 <% title "Applicant" %>
 
-<p>
-  <strong>Firstname:</strong>
-  <%=h @applicant.firstname %>
-</p>
-<p>
-  <strong>Lastname:</strong>
-  <%=h @applicant.lastname %>
-</p>
+<h2><%=h @applicant.firstname + " " + @applicant.lastname %></h2>
+
 <p>
   <strong>Address:</strong>
   <%=h @applicant.address %>
@@ -33,9 +27,17 @@
   <%=h @applicant.website %>
 </p>
 
+<p>
+	<strong>Statement:</strong><br />
+	<%=h @applicant.submissions.first.statement %>
+
+	<% for submission in @applicant.submissions %>
+		<%=h submission.works %>
+	<% end %>
+</p>
+
 
 <p>
-  <%= link_to "Edit", edit_applicant_path(@applicant) %> |
   <%= link_to "Destroy", @applicant, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", applicants_path %>
+  <%= link_to "View All", program_applicants_path(@applicant.program) %>
 </p>

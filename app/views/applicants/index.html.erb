@@ -1,4 +1,4 @@
-<% title "Applicants" %>
+<% title @program.title + " Applicants" %>
 
 <table width="100%">
   <tr align="left">
@@ -13,7 +13,6 @@
   </tr>
   <% for applicant in @applicants %>
     <tr>
-      
       <td><%=h applicant.firstname %></td>
       <td><%=h applicant.lastname %></td>
       <td><%=h applicant.address %></td>
@@ -22,20 +21,20 @@
       <td><%=h applicant.phone %></td>
       <td><%=h applicant.email %></td>
       <td><%=h applicant.website %></td>
-      <td>
-      	<div class="editcontrols">
-	      <%= link_to "Show", applicant %> | 
-	      <%= link_to "Edit", edit_applicant_path(applicant) %> | 
-	      <%= link_to "Destroy", applicant, :confirm => 'Are you sure?', :method => :delete %>
-	    </div>
-      </td>
+	      <td>
+	      	<div class="editcontrols">
+		      <%= link_to "Show", applicant %> | 
+		      <%= link_to "Destroy", applicant, :confirm => 'Are you sure?', :method => :delete %>
+		    </div>
+	      </td>
     </tr>
     <tr>
     	<% for submission in applicant.submissions %>
-    		<td>submission</td>
+    		<%= link_to "Submission", submission %>
     	<% end %>
     </tr>
   <% end %>
 </table>
 
-<p><%= link_to "New Applicant", new_applicant_path %></p>
+
+<p><%= link_to "New Applicant", new_program_applicant_path(@program) %></p>

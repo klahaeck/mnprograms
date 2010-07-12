@@ -7,20 +7,25 @@
 <table width="100%">
 	<% for program in @programs %>
 	    <tr align="left" valign="top" class="tablerow_<%= cycle("even", "odd") %>">
-	      <td width="50px"><%= link_to image_tag(program.logo.url(:icon)), program.url %></td>
-	      <td><strong><%=h link_to program.title, program.url %></strong></td>
-	      <% if admin_signed_in? %>
+	      <td width="50px"><%= link_to image_tag(program.logo.url(:icon)), program %></td>
+	      <td><strong><%=h link_to program.title, program %></strong></td>
+	      <td>
+	      	<% for user in program.users %>
+	      		<%=h user.username %>
+	      	<% end %>
+	      </td>
+	      	<% if user_signed_in? %>
 		      <td width="150px">
 		      	<div class="editcontrols">
-			      <%= link_to "Show", program.url %> | 
-			      <%= link_to "Edit", edit_program_path(program) %> | 
-			      <%= link_to "Destroy", program, :confirm => 'Are you sure?', :method => :delete %>
+		      		<%= link_to "Show", program %> | 
+				    <%= link_to "Edit", edit_program_path(program) %> | 
+				    <%= link_to "Destroy", program, :confirm => 'Are you sure?', :method => :delete %>
 			    </div> 
 		      </td>
-	      <% else %>
+	       <% else %>
 	      	<td width="150px">
 		      	<div class="editcontrols">
-		      		<%=h link_to "Apply", program.url %>
+		      		<%=h link_to "Apply", program %>
 		      	</div>
 		    </td>
 	      <% end %>
@@ -28,6 +33,5 @@
   	<% end %>
 </table>
 
-<% if admin_signed_in? %>
+
 	<p><%= button_to "New Program", new_program_path %></p>
-<% end %>

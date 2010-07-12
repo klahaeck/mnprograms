@@ -1,27 +1,32 @@
 class SubmissionsController < ApplicationController
+
+  before_filter :authenticate_user!, :except => [:new, :create]
   
   def index
-    @submissions = Submission.all
+  	@applicant = Applicant.find(params[:applicant_id])
+    @submissions = @applicant.submissions.all
   end
   
   def show
-    @submission = Submission.find(params[:id])
+  	@submission = Submission.find(params[:id])
+    @applicant = Applicant.find(@submission.applicant_id)
   end
   
   def new
   	@applicant = Applicant.find(params[:applicant_id])
   	@program = Program.find(@applicant.program_id)
-    @submission = Submission.new
+    @submission = @applicant.submissions.build
     4.times do
     	work = @submission.works.build
     end
   end
   
   def create
-    @submission = Submission.new(params[:submission])
-    @applicant = Applicant.find(@submission.applicant_id)
+  	@applicant = Applicant.find(params[:applicant_id])
   	@program = Program.find(@applicant.program_id)
-    if @submission.save
+    @submission = @applicant.submissions.build(params[:submission])
+   
+  	if @submission.save
       flash[:notice] = "You have successfully submitted your content!"
       redirect_to @program
     else
@@ -30,10 +35,14 @@ class SubmissionsController < ApplicationController
   end
   
   def edit
+  	@applicant = Applicant.find(params[:applicant_id])
+  	@program = Program.find(@applicant.program_id)
     @submission = Submission.find(params[:id])
   end
   
   def update
+  	@applicant = Applicant.find(params[:applicant_id])
+  	@program = Program.find(@applicant.program_id)
     @submission = Submission.find(params[:id])
     if @submission.update_attributes(params[:submission])
       flash[:notice] = "Successfully updated submission."
@@ -44,9 +53,11 @@ class SubmissionsController < ApplicationController
   end
   
   def destroy
+  	@applicant = Applicant.find(params[:applicant_id])
+  	@program = Program.find(@applicant.program_id)
     @submission = Submission.find(params[:id])
     @submission.destroy
     flash[:notice] = "Successfully destroyed submission."
-    redirect_to submissions_url
+    redirect_to @applicant
   end
 end

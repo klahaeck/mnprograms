@@ -8,12 +8,11 @@
   </head>
   <body>
   	<div id="user_nav">
-	    <% if admin_signed_in? %>
-		    <h2>admin</h2>
-		    Signed in as <%=link_to current_admin.email, edit_admin_registration_path %>. Not you?
-		    <%= link_to "Sign out", destroy_admin_session_path %>
+	    <% if user_signed_in? %>
+		    Signed in as <%=link_to current_user.username, edit_user_registration_path %>. Not you?
+		    <%= link_to "Sign out", destroy_user_session_path %>
 		<% else %>
-		  	<%= link_to "Sign in", new_admin_session_path %>
+		  	<%= link_to "Sign in", new_user_session_path %>
 		<% end %>
 	</div>
 	<div class="clear"></div>

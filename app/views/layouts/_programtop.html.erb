@@ -3,8 +3,9 @@
 	<%= stylesheet_link_tag 'show' %>
 <% end %>
 
-<% if admin_signed_in? %>
+<% if user_signed_in? %>
 	<div id="admincontrols">
+		<%= link_to "View Applicants", program_applicants_path(@program) %> | 
 		<%= link_to "View All Programs", programs_path %> | 
 		<%= link_to "Edit", edit_program_path(@program) %> |
 		<%= link_to "Destroy", @program, :confirm => 'Are you sure?', :method => :delete %>
@@ -13,11 +14,11 @@
 
 <% content_for :navbar do %>
 	<div id="sideBar">
-		<%= link_to image_tag(@program.logo.url(:medium)), root_url + @program.url %>
+		<%= link_to image_tag(@program.logo.url(:medium)), @program %>
 		<ul id="mainmenu">
-			<li><%= link_to "Description", root_url + @program.url %></li>
-			<li><%= link_to "Guidelines", root_url + @program.url + '/guidelines' %></li>
-			<li><%= link_to "Submit", new_applicant_path(:program_id => @program) %></li>
+			<li><%= link_to "Description", program_url(@program) %></li>
+			<li><%= link_to "Guidelines", program_url(@program) + '/guidelines' %></li>
+			<li><%= link_to "Submit", new_program_applicant_path(@program) %></li>
 		</ul>
 	</div>
 <% end %>

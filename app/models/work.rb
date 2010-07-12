@@ -1,5 +1,5 @@
 class Work < ActiveRecord::Base
-  attr_accessible :submission_id, :type_id, :title, :url, :image
+  #attr_accessible :submission_id, :type_id, :title, :url, :image
   
   belongs_to :submission
   has_one :type

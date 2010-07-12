@@ -2,6 +2,9 @@
 
 <% form_for resource_name, resource, :url => registration_path(resource_name), :html => { :method => :put } do |f| -%>
   <%= f.error_messages %>
+  
+  <p><%= f.label :username %></p>
+  <p><%= f.text_field :username %></p>
 
   <p><%= f.label :email %></p>
   <p><%= f.text_field :email %></p>
@@ -14,14 +17,15 @@
 
   <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i></p>
   <p><%= f.password_field :current_password %></p>
+  
+  <!--<p><%= f.label :role %></p>
+  <p><%= f.select :role, ['juror', 'admin'] %></p>-->
 
   <p><%= f.submit "Update" %></p>
 <% end -%>
 
-<% unless resource_name != 'admin' %>
-	<h3>Cancel my account</h3>
+<h3>Cancel my account</h3>
 
-	<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
-<% end %>
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
 
 <%= render :partial => "shared/devise_links" %>

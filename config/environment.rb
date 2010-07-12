@@ -21,6 +21,8 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem 'paperclip'
   config.gem 'devise', :version => '1.0.8'
+  config.gem 'warden'
+  config.gem "friendly_id", :version => "2.3.4"
   # config.gem 'aegis'
   # config.gem 'makandra-aegis', :lib => 'aegis', :source => 'http://gems.github.com'
 

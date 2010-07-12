@@ -1,4 +1,7 @@
 class WorksController < ApplicationController
+
+  before_filter :authenticate_user!, :except => [:new, :create]
+
   def index
     @works = Work.all
   end

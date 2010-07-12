@@ -1,9 +1,7 @@
-<% form_for @applicant do |f| %>
+<% form_for [@program, @applicant] do |f| %>
 	<%= f.error_messages %>
 	
 	<h2>Your Info</h2>
-	
-	<%= f.hidden_field :program_id, :value => params[:program_id] %>
 	
 	<p>
 		<%= f.label :firstname %><br />
