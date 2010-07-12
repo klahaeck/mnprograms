@@ -1,0 +1,17 @@
+<% title "Submissions" %>
+
+<table>
+  <tr>
+    <th>Applicant</th>
+    <th>Statement</th>
+  </tr>
+  <% for submission in @submissions %>
+    <tr>
+      <td><%=h submission.applicant_id %></td>
+      <td><%=h submission.statement %></td>
+      <td><%= link_to "Show", submission %></td>
+      <td><%= link_to "Edit", edit_submission_path(submission) %></td>
+      <td><%= link_to "Destroy", submission, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>

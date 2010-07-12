@@ -1,0 +1,41 @@
+<% title "Applicants" %>
+
+<table width="100%">
+  <tr align="left">
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Address</th>
+    <th>City</th>
+    <th>Zip</th>
+    <th>Phone</th>
+    <th>Email</th>
+    <th>Website</th>
+  </tr>
+  <% for applicant in @applicants %>
+    <tr>
+      
+      <td><%=h applicant.firstname %></td>
+      <td><%=h applicant.lastname %></td>
+      <td><%=h applicant.address %></td>
+      <td><%=h applicant.city %></td>
+      <td><%=h applicant.zip %></td>
+      <td><%=h applicant.phone %></td>
+      <td><%=h applicant.email %></td>
+      <td><%=h applicant.website %></td>
+      <td>
+      	<div class="editcontrols">
+	      <%= link_to "Show", applicant %> | 
+	      <%= link_to "Edit", edit_applicant_path(applicant) %> | 
+	      <%= link_to "Destroy", applicant, :confirm => 'Are you sure?', :method => :delete %>
+	    </div>
+      </td>
+    </tr>
+    <tr>
+    	<% for submission in applicant.submissions %>
+    		<td>submission</td>
+    	<% end %>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Applicant", new_applicant_path %></p>

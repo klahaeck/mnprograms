@@ -1,0 +1,33 @@
+<% content_for :head do %>
+	<title>Programs</title>
+<% end %>
+
+<h1>Programs</h1>
+
+<table width="100%">
+	<% for program in @programs %>
+	    <tr align="left" valign="top" class="tablerow_<%= cycle("even", "odd") %>">
+	      <td width="50px"><%= link_to image_tag(program.logo.url(:icon)), program.url %></td>
+	      <td><strong><%=h link_to program.title, program.url %></strong></td>
+	      <% if admin_signed_in? %>
+		      <td width="150px">
+		      	<div class="editcontrols">
+			      <%= link_to "Show", program.url %> | 
+			      <%= link_to "Edit", edit_program_path(program) %> | 
+			      <%= link_to "Destroy", program, :confirm => 'Are you sure?', :method => :delete %>
+			    </div> 
+		      </td>
+	      <% else %>
+	      	<td width="150px">
+		      	<div class="editcontrols">
+		      		<%=h link_to "Apply", program.url %>
+		      	</div>
+		    </td>
+	      <% end %>
+	    </tr>
+  	<% end %>
+</table>
+
+<% if admin_signed_in? %>
+	<p><%= button_to "New Program", new_program_path %></p>
+<% end %>

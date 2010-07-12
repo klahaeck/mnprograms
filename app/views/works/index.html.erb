@@ -1,0 +1,23 @@
+<% title "Works" %>
+
+<table>
+  <tr>
+    <th>Submission</th>
+    <th>Type</th>
+    <th>Title</th>
+    <th>Url</th>
+  </tr>
+  <% for work in @works %>
+    <tr>
+      <td><%=h work.submission_id %></td>
+      <td><%=h work.type_id %></td>
+      <td><%=h work.title %></td>
+      <td><%=h work.url %></td>
+      <td><%= link_to "Show", work %></td>
+      <td><%= link_to "Edit", edit_work_path(work) %></td>
+      <td><%= link_to "Destroy", work, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Work", new_work_path %></p>

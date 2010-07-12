@@ -1,0 +1,29 @@
+development:
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: mnprograms_dev
+  pool: 5
+  username: root
+  password: root
+  socket: /tmp/mysql.sock
+  
+test:
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: mnprograms_test
+  pool: 5
+  username: root
+  password: root
+  socket: /tmp/mysql.sock
+
+production:
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: mnprograms_prod
+  pool: 5
+  username: root
+  password: root
+  socket: /var/run/mysqld/mysqld.sock

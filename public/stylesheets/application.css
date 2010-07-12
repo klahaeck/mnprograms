@@ -1,0 +1,245 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+  background-color: #999999;
+  background-image: url(/images/bg_pattern.jpg);
+  font-family: Verdana, Helvetica, Arial;
+  font-size: 12px;
+}
+
+a img {
+  border: none;
+}
+
+a {
+	text-decoration: none;
+	outline: none;
+	color: #333333;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+p {
+	margin: 12px 0 12px 0;
+}
+
+h1 {
+	font-size: 24px;
+	color: #666666;
+	padding-bottom: 10px;
+}
+
+h2 {
+	text-transform: uppercase;
+	font-size: 14px;
+	color: #666666;
+}
+
+label {
+	font-weight: bold;
+}
+
+td {
+	padding: 5px;
+}
+
+.clear {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+#container {
+  width: 920px;
+  margin: 0 auto;
+  background-color: #FFF;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+#flash_notice, #flash_error {
+  padding: 8px 10px;
+  margin: 0 0;
+}
+
+#flash_notice {
+  color: green;
+  text-align: center;
+  background-color: #CFC;
+  /*border: solid 1px #6C6;*/
+}
+
+#flash_error {
+  background-color: #FCC;
+  border: solid 1px #C66;
+}
+
+.fieldWithErrors {
+  display: inline;
+}
+
+#errorExplanation {
+  width: 100%;
+  padding: 0px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #FFCCCC;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: 0;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 8px;
+}
+
+#errorExplanation ul {
+  margin: 2px 24px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: disc;
+}
+
+#header {
+	margin-left: 257px;
+	text-align: center;
+	padding: 30px;
+	border-bottom: solid;
+	border-bottom-color: #CCCCCC;
+	border-bottom-width: 1px;
+}
+
+#user_nav {
+	width: 920px;
+	margin: 0 auto;
+	background-color: #CCC;
+	padding: 10px 20px 10px 20px;
+	text-align: right;
+	color: green;
+}
+
+#user_nav h2 {
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+
+#content {
+	margin-left: 257px;
+	padding: 30px;
+}
+
+#admincontrols {
+	float: right;
+	padding: 5px;
+}
+
+#sideBar {
+	top: 0;
+	left: 0;
+	float: left;
+	width: 257px;
+	padding-bottom: 30px;
+	border-right: dashed;
+	border-right-color: #CCCCCC;
+	border-right-width: 1px;
+	border-bottom: dashed;
+	border-bottom-color: #CCCCCC;
+	border-bottom-width: 1px;
+	margin-bottom: 20px;
+}
+
+#mainmenu {
+	margin: 0;
+	padding: 20px 5px 10px 60px;
+	list-style: none;
+}
+
+#mainmenu li {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 16px;
+	padding-bottom: 5px;
+}
+
+#mainmenu a:link,
+#mainmenu a:visited {
+	color: #666666;
+}
+
+#mainmenu a:hover {
+	color: #000000;
+}
+
+#footer {
+	clear: both;
+	padding: 20px 80px 40px 80px;
+	background-color: #CCCCCC;
+	margin-bottom: 16px;
+}
+
+.submit_even {
+	padding: 10px 20px 10px 20px;
+	margin-bottom: 16px;
+}
+
+.submit_odd {
+	padding: 10px 20px 10px 20px;
+	margin-bottom: 16px;
+	background: #EFEFEF;
+}
+
+.instructions {
+	font-size: 10px;
+	color: green;
+	margin: 0;
+	padding: 0 0 0 30px;
+}
+
+#footerlinks {
+	text-align: right;
+	padding: 5px 20px 5px 20px;
+}
+
+#footerlinks a:link,
+#footerlinks a:visited {
+	color: #999999;
+}
+
+#footerlinks a:hover,
+#footerlinks a:active {
+	color: #333333;
+}
+
+.admincontent {
+	padding: 20px;
+}
+
+.tablerow_even {
+	background: #EFEFEF;
+}
+
+.tablerow_odd {
+
+	
+}
+
+.editcontrols {
+	float: right;
+}

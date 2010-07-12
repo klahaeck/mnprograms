@@ -1,0 +1,16 @@
+<% title "Submission" %>
+
+<p>
+  <strong>Applicant:</strong>
+  <%=h @submission.applicant_id %>
+</p>
+<p>
+  <strong>Statement:</strong>
+  <%=h @submission.statement %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_submission_path(@submission) %> |
+  <%= link_to "Destroy", @submission, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", submissions_path %>
+</p>
