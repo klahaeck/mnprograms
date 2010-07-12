@@ -12,7 +12,7 @@
 	    <%= f.text_area :statement, :cols => 77, :rows => 10 %>
 	  </p>
 	  <% i = 0 %>
-	  <% f.fields_for :works, :html => { :multipart => true } do |builder| %>
+	  <% f.fields_for :works do |builder| %>
 	  	<div class="submit_<%= cycle("even", "odd") %>">
 			<%= render 'work_fields', :f => builder, :i => i %>
 		</div>

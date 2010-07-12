@@ -4,7 +4,7 @@ class SubmissionsController < ApplicationController
   
   def index
   	@applicant = Applicant.find(params[:applicant_id])
-    @submissions = @applicant.submissions.all
+    @submissions = @applicant.build_submission
   end
   
   def show
@@ -15,7 +15,7 @@ class SubmissionsController < ApplicationController
   def new
   	@applicant = Applicant.find(params[:applicant_id])
   	@program = Program.find(@applicant.program_id)
-    @submission = @applicant.submissions.build
+    @submission = @applicant.build_submission
     4.times do
     	work = @submission.works.build
     end
@@ -24,7 +24,7 @@ class SubmissionsController < ApplicationController
   def create
   	@applicant = Applicant.find(params[:applicant_id])
   	@program = Program.find(@applicant.program_id)
-    @submission = @applicant.submissions.build(params[:submission])
+    @submission = @applicant.build_submission(params[:submission])
    
   	if @submission.save
       flash[:notice] = "You have successfully submitted your content!"
