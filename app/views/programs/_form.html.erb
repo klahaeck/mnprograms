@@ -10,7 +10,7 @@
   	<%= f.label :jurors %>:<br />
   	<span class="instructions">You may select multiple jurors.</span><br />
   	<%= select_tag "program[user_ids][]", options_from_collection_for_select(User.all, "id", "username"), :multiple => true, :size => 2 %><br />
-  	<%= link_to "Add User", new_user_registration_path %>
+  	<%= link_to "Add User", new_user_path %>
   </div>
   
   <p>

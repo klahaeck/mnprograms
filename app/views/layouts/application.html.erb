@@ -11,7 +11,10 @@
     <% if user_signed_in? %>
 	    <div id="user_nav">
 	    	<h2><%= current_user.role %></h2>
-		    Signed in as <%=link_to current_user.username, edit_user_registration_path %>. Not you?
+	    	<% if current_user.role == 'admin' %>
+	    		<%= link_to "manage users", users_path %>
+	    	<% end %> | 
+		    Signed in as <%=link_to current_user.username, edit_user_path(current_user) %>. Not you?
 		    <%= link_to "Sign out", destroy_user_session_path %>
 		</div>
 	<% end %>

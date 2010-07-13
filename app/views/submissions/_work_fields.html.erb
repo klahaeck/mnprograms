@@ -3,7 +3,7 @@
 	<%= f.select :type_id, Type.all.collect{|p| [p.title, p.id]}%>
 </p>
 <p>
-	<%= f.label :title %>: 
+	<%= f.label :title, "Title/Medium" %>: 
 	<%= f.text_field :title, :size => 75 %>
 </p>
 
