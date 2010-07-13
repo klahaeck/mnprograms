@@ -1,0 +1,28 @@
+<div id="admincontrols">
+	<%= link_to "Back to Programs", root_url %>
+</div>
+
+<% title "Users" %>
+
+<table>
+  <tr>
+    <th>Username</th>
+    <th>Email</th>
+    <th>Role</th>
+  </tr>
+  <% for user in @users %>
+    <tr>
+      <td><%=h user.username %></td>
+      <td><%=h user.email %></td>
+      <td><%=h user.role %></td>
+      <% if current_user.role == 'admin' %>
+	      <td><%= link_to "Edit", edit_user_path(user) %></td>
+	      <td><%= link_to "Destroy", user, :confirm => 'Are you sure?', :method => :delete %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<% if current_user.role == 'admin' %>
+	<p><%= link_to "New User", new_user_path %></p>
+<% end %>
