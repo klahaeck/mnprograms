@@ -18,8 +18,10 @@
   <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i></p>
   <p><%= f.password_field :current_password %></p>
   
-  <!--<p><%= f.label :role %></p>
-  <p><%= f.select :role, ['juror', 'admin'] %></p>-->
+  <% if current_user.role == 'admin' %>
+	  <p><%= f.label :role %></p>
+	  <p><%= f.select( :role, ['juror', 'admin']) %></p>
+  <% end %>
 
   <p><%= f.submit "Update" %></p>
 <% end -%>

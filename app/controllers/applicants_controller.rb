@@ -32,7 +32,6 @@ class ApplicantsController < ApplicationController
   end
   
   def update
-  	@program = Program.find(params[:program_id])
   	@applicant = Applicant.find(params[:id])
     if @applicant.update_attributes(params[:applicant])
       flash[:notice] = "Successfully updated applicant."

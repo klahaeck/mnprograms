@@ -7,10 +7,10 @@
 	<%= f.text_field :title, :size => 75 %>
 </p>
 
-<div id="file_<%= i %>">
+<div id="image_<%= i %>">
 	<p class="instructions">Instuctions here</p>
 	<p>
-		<%= f.label :image, "File" %>: 
+		<%= f.label :image, "Image File" %>: 
 		<%= f.file_field :image %>
 	</p>
 </div>
@@ -20,5 +20,13 @@
 	<p>
 		<%= f.label :url %>: 
 		<%= f.text_field :url, :size => 75 %>
+	</p>
+</div>
+
+<div id="document_<%= i %>">
+	<p class="instructions">Instuctions here</p>
+	<p>
+		<%= f.label :document, "Document File" %>: 
+		<%= f.file_field :document %>
 	</p>
 </div>

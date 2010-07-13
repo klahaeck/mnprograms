@@ -205,11 +205,19 @@ td {
 	background: #EFEFEF;
 }
 
+.even {
+	background: #EFEFEF;
+}
+
+.odd {
+	
+}
+
 .instructions {
 	font-size: 10px;
 	color: green;
 	margin: 0;
-	padding: 0 0 0 30px;
+	padding: 0;
 }
 
 #footerlinks {
@@ -242,4 +250,32 @@ td {
 
 .editcontrols {
 	float: right;
+}
+
+ul.work li {
+	list-style: none;
+	float: left;
+	width: 200px;
+	height: 200px;
+	display: block;
+	background: #E9E9E9;
+	padding: 10px;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+
+ul.worksmall li {
+	list-style: none;
+	float: left;
+	width: 75px;
+	height: 75px;
+	display: block;
+	background: #E9E9E9;
+	padding: 5px;
+	margin-right: 10px;
+}
+
+#usersform {
+	float: right;
+	width: 380px;
 }

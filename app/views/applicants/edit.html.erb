@@ -4,5 +4,5 @@
 
 <p>
   <%= link_to "Show", @applicant %> |
-  <%= link_to "View All", applicants_path %>
+  <%= link_to "View All", program_applicants_path(@applicant.program) %>
 </p>

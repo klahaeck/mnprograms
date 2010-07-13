@@ -7,5 +7,5 @@
 #   Major.create(:name => 'Daley', :city => cities.first)
 
 puts 'SETTING UP DEFAULT USER LOGIN'
-user = User.create! :email => 'user@test.com', :password => 'root', :password_confirmation => 'root'
+user = User.create! :username => 'root', :email => 'admin@root.com', :password => '9487oy', :password_confirmation => '9487oy', :role => 'admin'
 puts 'New user created: ' << user.email

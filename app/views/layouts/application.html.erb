@@ -7,14 +7,15 @@
     <%= yield(:head) %>
   </head>
   <body>
-  	<div id="user_nav">
-	    <% if user_signed_in? %>
+	
+    <% if user_signed_in? %>
+	    <div id="user_nav">
+	    	<h2><%= current_user.role %></h2>
 		    Signed in as <%=link_to current_user.username, edit_user_registration_path %>. Not you?
 		    <%= link_to "Sign out", destroy_user_session_path %>
-		<% else %>
-		  	<%= link_to "Sign in", new_user_session_path %>
-		<% end %>
-	</div>
+		</div>
+	<% end %>
+	
 	<div class="clear"></div>
 	
     <div id="container">

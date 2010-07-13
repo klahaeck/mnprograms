@@ -20,7 +20,7 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem 'paperclip'
-  config.gem 'devise', :version => '1.0.8'
+  config.gem 'devise', :version => '1.0.8', :source => 'git://github.com/klahaeck/devise.git'
   config.gem 'warden'
   config.gem "friendly_id", :version => "2.3.4"
   # config.gem 'aegis'

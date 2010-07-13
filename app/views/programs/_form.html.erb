@@ -1,5 +1,18 @@
+<% content_for :head do %>
+	<%= javascript_include_tag :ckeditor %>
+<% end %>
+
 <% form_for @program, :html => { :multipart => true } do |f| %>
+
   <%= f.error_messages %>
+  
+  <div id="usersform">
+  	<%= f.label :jurors %>:<br />
+  	<span class="instructions">You may select multiple jurors.</span><br />
+  	<%= select_tag "program[user_ids][]", options_from_collection_for_select(User.all, "id", "username"), :multiple => true, :size => 2 %><br />
+  	<%= link_to "Add User", new_user_registration_path %>
+  </div>
+  
   <p>
     <%= f.label :title %>: 
     <%= f.text_field :title %>
@@ -16,23 +29,16 @@
   </p>
   <p>
   	<%= f.label :description %>:<br />
-  	<%= f.text_area :description, :rows => 5, :cols => 100 %>
+  	<%= f.cktext_area :description, :toolbar=>'Full', :width=>'900px', :heigth=>'100px' %>
   </p>
   <p>
     <%= f.label :guidlines %>:<br />
-    <%= f.text_area :guidlines, :rows => 5, :cols => 100 %>
+    <%= f.cktext_area :guidlines, :toolbar=>'Full', :width=>'900px', :heigth=>'100px' %>
   </p>
   <p>
     <%= f.label :contact %>:<br />
-    <%= f.text_area :contact, :rows => 5, :cols => 100 %>
+    <%= f.cktext_area :contact, :toolbar=>'Full', :width=>'900px', :heigth=>'100px' %>
   </p>
   
-  <p>
-  	<%= f.label :users %>:<br />
-  	<span class="instructions">You may select multiple jurors.  If you do not see the juror here, you must add them here.</span><br />
-  	<%= f.select("users", options_for_select(User.find(:all).collect { |user| [user.username, user.id] }, @program.users.collect { |user| user.id}), {:multiple=>true, :size=>6})%><br />
-  	<%= link_to "Add User", new_user_registration_path %>
-  </p>
-
   <p><%= f.submit %></p>
 <% end %>

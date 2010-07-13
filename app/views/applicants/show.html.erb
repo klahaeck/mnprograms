@@ -1,4 +1,14 @@
-<% title "Applicant" %>
+<% content_for :head do %>
+	<%= stylesheet_link_tag '/javascripts/shadowbox/shadowbox' %>
+	<%= javascript_include_tag 'shadowbox/shadowbox' %>
+	<%= javascript_include_tag 'shadowbox_config' %>
+<% end %>
+
+<div id="admincontrols">
+	<%= link_to "Back to Program", @applicant.program %>
+</div>
+
+<% title @applicant.program.title + " Applicant" %>
 
 <h2><%=h @applicant.firstname + " " + @applicant.lastname %></h2>
 
@@ -28,11 +38,32 @@
 </p>
 
 <p>
-	<strong>Statement:</strong><br />
+	<h1>Statement:</h1>
+	<%=h @applicant.submission.statement %>
 </p>
-
 
 <p>
-  <%= link_to "Destroy", @applicant, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", program_applicants_path(@applicant.program) %>
+	<h1>Work</h1>
+	<ul class="work">
+		<% for work in @applicant.submission.works %>
+			<li>
+				<strong>Type: </strong><%= work.type.title %><br />
+				<% if work.type.id == 1 %>
+					<%= link_to image_tag(work.image.url(:med)), work.image.url(:large), :alt => work.title, :rel => 'shadowbox[gallery]' %>
+				<% elsif work.type.id == 4 %>
+					<%= link_to work.title, work.document.url %>
+				<% elsif work.type.id == 2 || work.type.id == 3 %>
+					<%= link_to work.title, work.url, :target => :blank %>
+				<% end %>
+			</li>
+		<% end %>
+	</ul>
+	<div class="clear"></div>
 </p>
+
+<% if current_user.role == 'admin' %>
+	<p>
+		<%= link_to "Destroy", @applicant, :confirm => 'Are you sure?', :method => :delete %> |
+		<%= link_to "View All", program_applicants_path(@applicant.program) %>
+	</p>
+<% end %>

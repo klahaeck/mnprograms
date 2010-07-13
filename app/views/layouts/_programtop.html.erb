@@ -5,10 +5,15 @@
 
 <% if user_signed_in? %>
 	<div id="admincontrols">
-		<%= link_to "View Applicants", program_applicants_path(@program) %> | 
-		<%= link_to "View All Programs", programs_path %> | 
-		<%= link_to "Edit", edit_program_path(@program) %> |
-		<%= link_to "Destroy", @program, :confirm => 'Are you sure?', :method => :delete %>
+		<% if @program.users.include?(current_user) || current_user.role == 'admin' %>
+			<%= link_to "View Applicants", program_applicants_path(@program) %>
+		<% end %>
+		<% if current_user.role == 'admin' %>
+			 | 
+			<%= link_to "View All Programs", programs_path %> | 
+			<%= link_to "Edit", edit_program_path(@program) %> |
+			<%= link_to "Destroy", @program, :confirm => 'Are you sure?', :method => :delete %>
+		<% end %>
 	</div>
 <% end %>
 

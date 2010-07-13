@@ -1,32 +1,50 @@
+<% content_for :head do %>
+	<%= stylesheet_link_tag '/javascripts/shadowbox/shadowbox' %>
+	<%= javascript_include_tag 'shadowbox/shadowbox' %>
+	<%= javascript_include_tag 'shadowbox_config' %>
+<% end %>
+
+<div id="admincontrols">
+	<%= link_to "Back to Program", @program %>
+</div>
+
 <% title @program.title + " Applicants" %>
 
 <table width="100%">
   <tr align="left">
     <th>Firstname</th>
     <th>Lastname</th>
-    <th>Address</th>
-    <th>City</th>
-    <th>Zip</th>
-    <th>Phone</th>
-    <th>Email</th>
-    <th>Website</th>
+    <th>work</th>
   </tr>
   <% for applicant in @applicants %>
-    <tr>
+    <tr class="<%= cycle('even', 'odd') %>">
       <td><%=h applicant.firstname %></td>
       <td><%=h applicant.lastname %></td>
-      <td><%=h applicant.address %></td>
-      <td><%=h applicant.city %></td>
-      <td><%=h applicant.zip %></td>
-      <td><%=h applicant.phone %></td>
-      <td><%=h applicant.email %></td>
-      <td><%=h applicant.website %></td>
-	      <td>
-	      	<div class="editcontrols">
-		      <%= link_to "Show", applicant %> | 
-		      <%= link_to "Destroy", applicant, :confirm => 'Are you sure?', :method => :delete %>
-		    </div>
-	      </td>
+	  <td>
+	  	<ul class="worksmall">
+	  		<% for work in applicant.submission.works %>
+				<li>
+					<% if work.type.id == 1 %>
+						<%= link_to image_tag(work.image.url(:icon)), work.image.url(:large), :alt => work.title, :rel => 'shadowbox[gallery]' %>
+					<% elsif work.type.id == 4 %>
+						<%= link_to work.title, work.document.url %>
+					<% elsif work.type.id == 2 || work.type.id == 3 %>
+						<%= link_to work.title, work.url, :target => :blank %>
+					<% end %>
+				</li>
+			<% end %>
+	  	</ul>
+	  </td>
+      <td>
+      	<div class="editcontrols">
+      		<%= link_to "Show", applicant %>
+			<% if current_user.role == 'admin' %>
+				| 
+				<%= link_to "Edit", edit_applicant_path(applicant) %> | 
+				<%= link_to "Destroy", applicant, :confirm => 'Are you sure?', :method => :delete %>
+			<% end %>
+	    </div>
+      </td>
     </tr>
     <tr>
     	
@@ -34,5 +52,6 @@
   <% end %>
 </table>
 
-
-<p><%= link_to "New Applicant", new_program_applicant_path(@program) %></p>
+<% if current_user.role == 'admin' %>
+	<p><%= link_to "New Applicant", new_program_applicant_path(@program) %></p>
+<% end %>

@@ -1,9 +1,10 @@
 class ProgramsController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:named, :guidelines, :index, :show]
+  before_filter :authenticate_user!, :except => [:guidelines, :index, :show]
  
   def index
     @programs = Program.all
+    @users = User.all
   end
   
   def show
@@ -15,6 +16,7 @@ class ProgramsController < ApplicationController
   end
   
   def new
+  	@jurors = User.find_by_role('admin')
     @program = Program.new
   end
   
@@ -29,6 +31,7 @@ class ProgramsController < ApplicationController
   end
   
   def edit
+  	@jurors = User.find_by_role('admin')
     @program = Program.find(params[:id])
   end
   

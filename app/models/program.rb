@@ -1,7 +1,7 @@
 class Program < ActiveRecord::Base
-  attr_accessible :title, :guidlines, :contact, :logo
+  #attr_accessible :title, :guidlines, :contact, :logo, :user_id
   
-  validates_presence_of :title, :guidelines, :contact
+  validates_presence_of :title
   validates_uniqueness_of :title
   
   has_many :jurorships
