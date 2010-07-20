@@ -14,8 +14,14 @@
   </div>
   
   <p>
-    <%= f.label :title %>: 
-    <%= f.text_field :title %>
+  	<%= f.label :title %>:
+  	<% if @program.title %>
+  		<%= @program.title %>
+    <% else %>
+    	<%= f.text_field :title %>
+    <% end %> 
+    <%= f.label :published %>: 
+    <%= f.check_box :published %>
   </p>
   <p>
     <%= f.label :logo %>: 

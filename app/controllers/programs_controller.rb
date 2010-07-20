@@ -10,8 +10,13 @@ class ProgramsController < ApplicationController
   def show
     @program = Program.find(params[:id])
     
-    respond_to do |format|
-       format.html
+    if @program.published == true || user_signed_in?
+	    respond_to do |format|
+	       format.html
+	    end
+    else
+    	flash[:notice] = "The program you've selected cannot be found."
+    	redirect_to programs_url
     end
   end
   
@@ -55,8 +60,13 @@ class ProgramsController < ApplicationController
   def guidelines
   	@program = Program.find(params[:id])
   	
-    respond_to do |format|
-       format.html
+  	if @program.published == true || user_signed_in?
+	    respond_to do |format|
+	       format.html
+	    end
+	else
+		flash[:notice] = "The program you've selected cannot be found."
+    	redirect_to programs_url
     end
   end
   

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100714205537) do
+ActiveRecord::Schema.define(:version => 20100720005641) do
 
   create_table "applicants", :force => true do |t|
     t.integer  "program_id"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20100714205537) do
     t.date     "end"
     t.text     "description"
     t.string   "url"
+    t.boolean  "published"
   end
 
   create_table "slugs", :force => true do |t|
@@ -81,6 +82,10 @@ ActiveRecord::Schema.define(:version => 20100714205537) do
     t.text     "statement"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "resume_file_name"
+    t.string   "resume_content_type"
+    t.integer  "resume_file_size"
+    t.datetime "resume_updated_at"
   end
 
   create_table "types", :force => true do |t|

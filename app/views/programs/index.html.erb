@@ -11,42 +11,48 @@
 	<th align="left">end date</th>
 	<% if user_signed_in? %>
 		<% if current_user.role == 'admin' %>
+			<th align="left">Published</th>
 			<th align="left">jurors</th>
 		<% end %>
 	<% end %>
 	<% for program in @programs %>
-	    <tr align="left" valign="top" class="tablerow_<%= cycle("even", "odd") %>">
-	      <td width="50px"><%= link_to image_tag(program.logo.url(:icon)), program %></td>
-	      <td><strong><%=h link_to program.title, program %></strong></td>
-	      <td><%=h program.start.strftime('%m/%d/%Y') %></td>
-	      <td><%=h program.end.strftime('%m/%d/%Y') %></td>
-	      <% if user_signed_in? %>
-	      		<% if current_user.role == 'admin' %>
-					<td>
-						<% for user in program.users %>
-							<%=h user.username %>
-						<% end %>
-					</td>
-				<% end %>
-	      <% end %>
-			<% if user_signed_in? %>
-				<% if current_user.role == 'admin' %>
+		<% if program.published == true || user_signed_in? %>
+		    <tr align="left" valign="top" class="tablerow_<%= cycle("even", "odd") %>">
+		      <td width="50px"><%= link_to image_tag(program.logo.url(:icon)), program %></td>
+		      <td><strong><%=h link_to program.title, program %></strong></td>
+		      <td><%=h program.start.strftime('%m/%d/%Y') %></td>
+		      <td><%=h program.end.strftime('%m/%d/%Y') %></td>
+		      <% if user_signed_in? %>
+		      		<% if current_user.role == 'admin' %>
+		      			<td>
+		      				<%= program.published %>
+		      			</td>
+						<td>
+							<% for user in program.users %>
+								<%=h user.username %>
+							<% end %>
+						</td>
+					<% end %>
+		      <% end %>
+				<% if user_signed_in? %>
+					<% if current_user.role == 'admin' %>
+						<td width="150px">
+							<div class="editcontrols">
+								<%= link_to "Show", program %> | 
+								<%= link_to "Edit", edit_program_path(program) %> | 
+								<%= link_to "Destroy", program, :confirm => 'Are you sure?', :method => :delete %>
+							</div> 
+						</td>
+					<% end %>
+				<% else %>
 					<td width="150px">
 						<div class="editcontrols">
-							<%= link_to "Show", program %> | 
-							<%= link_to "Edit", edit_program_path(program) %> | 
-							<%= link_to "Destroy", program, :confirm => 'Are you sure?', :method => :delete %>
-						</div> 
+							<%=h link_to "Apply", program %>
+						</div>
 					</td>
 				<% end %>
-			<% else %>
-				<td width="150px">
-					<div class="editcontrols">
-						<%=h link_to "Apply", program %>
-					</div>
-				</td>
-			<% end %>
-	    </tr>
+		    </tr>
+	    <% end %>
   	<% end %>
 </table>
 
