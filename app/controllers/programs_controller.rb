@@ -1,6 +1,6 @@
 class ProgramsController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:guidelines, :index, :show]
+  before_filter :authenticate_user!, :except => [:thankyou, :guidelines, :index, :show]
  
   def index
     @programs = Program.all
@@ -58,6 +58,19 @@ class ProgramsController < ApplicationController
   end
   
   def guidelines
+  	@program = Program.find(params[:id])
+  	
+  	if @program.published == true || user_signed_in?
+	    respond_to do |format|
+	       format.html
+	    end
+	else
+		flash[:notice] = "The program you've selected cannot be found."
+    	redirect_to programs_url
+    end
+  end
+  
+  def thankyou
   	@program = Program.find(params[:id])
   	
   	if @program.published == true || user_signed_in?

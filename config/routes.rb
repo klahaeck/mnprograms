@@ -15,6 +15,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   
   map.connect 'programs/:id/guidelines', :controller => 'programs', :action => 'guidelines'
+  map.connect 'programs/:id/thankyou', :controller => 'programs', :action => 'thankyou'
   
   map.root :programs
   

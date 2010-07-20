@@ -2,6 +2,11 @@ class Program < ActiveRecord::Base
   #attr_accessible :title, :guidlines, :contact, :logo, :user_id
   
   validates_presence_of :title
+  validates_presence_of :description
+  #validates_presence_of :guidelines
+  validates_presence_of :contact
+  validates_presence_of :thankyou
+  
   validates_uniqueness_of :title
   
   has_many :jurorships
