@@ -29,8 +29,12 @@ document.observe('dom:loaded', function() {
 				processSelection(i, option);
 			});
 			
-			$('url_' + i).hide();
-			$('document_' + i).hide();
+			//alert($('submission_works_attributes_' + i + '_type_id').selectedIndex);
+			
+			processSelection(i, $('submission_works_attributes_' + i + '_type_id').options[$('submission_works_attributes_' + i + '_type_id').selectedIndex].value);
+			
+			//$('url_' + i).hide();
+			//$('document_' + i).hide();
 			
 		})(i);
 	}
