@@ -125,6 +125,10 @@ td {
 	border-bottom-width: 1px;
 }
 
+#header h1 {
+	text-transform: uppercase;
+}
+
 #user_nav {
 	width: 920px;
 	margin: 0 auto;
@@ -278,4 +282,8 @@ ul.worksmall li {
 #usersform {
 	float: right;
 	width: 380px;
+}
+
+.required {
+	color: #FF0000;
 }

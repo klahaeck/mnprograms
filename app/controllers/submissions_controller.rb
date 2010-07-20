@@ -28,7 +28,7 @@ class SubmissionsController < ApplicationController
    
   	if @submission.save
       flash[:notice] = "You have successfully submitted your content!"
-      redirect_to @program
+      redirect_to program_url(@program) + '/thankyou'
     else
       render :action => 'new'
     end

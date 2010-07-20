@@ -21,19 +21,23 @@
       <td><%=h applicant.firstname %></td>
       <td><%=h applicant.lastname %></td>
 	  <td>
-	  	<ul class="worksmall">
-	  		<% for work in applicant.submission.works %>
-				<li>
-					<% if work.type.id == 1 %>
-						<%= link_to image_tag(work.image.url(:icon)), work.image.url(:large), :alt => work.title, :rel => 'shadowbox[gallery]' %>
-					<% elsif work.type.id == 4 %>
-						<%= link_to work.title, work.document.url %>
-					<% elsif work.type.id == 2 || work.type.id == 3 %>
-						<%= link_to work.title, work.url, :target => :blank %>
-					<% end %>
-				</li>
-			<% end %>
-	  	</ul>
+	    <% if applicant.submission %>
+	  		<ul class="worksmall">
+	  			<% for work in applicant.submission.works %>
+					<li>
+						<% if work.type.id == 1 %>
+							<%= link_to image_tag(work.image.url(:icon)), work.image.url(:large), :alt => work.title, :rel => 'shadowbox[gallery]' %>
+						<% elsif work.type.id == 2 || work.type.id == 3 %>
+							<%= link_to work.title, work.url, :rel => 'shadowbox[gallery]' %>
+						<% elsif work.type.id == 4 %>
+							<%= link_to work.title, work.document.url, :target => :blank %>
+						<% end %>
+					</li>
+				<% end %>
+	  		</ul>
+	  	<% else %>
+	  		No Submission
+	  	<% end %>
 	  </td>
       <td>
       	<div class="editcontrols">

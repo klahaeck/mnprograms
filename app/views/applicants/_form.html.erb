@@ -4,36 +4,39 @@
 	<h2>Your Info</h2>
 	
 	<p>
-		<%= f.label :firstname %><br />
+		<%= f.label :firstname %><span class="required">*</span><br />
 		<%= f.text_field :firstname %>
 	</p>
 	<p>
-		<%= f.label :lastname %><br />
+		<%= f.label :lastname %><span class="required">*</span><br />
 		<%= f.text_field :lastname %>
 	</p>
 	<p>
-		<%= f.label :address %><br />
+		<%= f.label :address %><span class="required">*</span><br />
 		<%= f.text_field :address %>
 	</p>
 	<p>
-		<%= f.label :city %><br />
+		<%= f.label :city %><span class="required">*</span><br />
 		<%= f.text_field :city %>
 	</p>
 	<p>
-		<%= f.label :zip %><br />
+		<%= f.label :zip %><span class="required">*</span><br />
 		<%= f.text_field :zip %>
 	</p>
 	<p>
-		<%= f.label :phone %><br />
+		<%= f.label :phone %><span class="required">*</span><br />
 		<%= f.text_field :phone %>
 	</p>
 	<p>
-		<%= f.label :email %><br />
+		<%= f.label :email %><span class="required">*</span><br />
 		<%= f.text_field :email %>
 	</p>
 	<p>
 		<%= f.label :website %><br />
 		<%= f.text_field :website %>
+	</p>
+	<p>
+		<span class="required">*</span><span class="instructions"> = Required Field</span>
 	</p>
 	<p>
 		<%= f.submit 'Continue' %>

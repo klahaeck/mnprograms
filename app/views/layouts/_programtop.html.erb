@@ -6,7 +6,9 @@
 <% if user_signed_in? %>
 	<div id="admincontrols">
 		<% if @program.users.include?(current_user) || current_user.role == 'admin' %>
-			<%= link_to "View Applicants", program_applicants_path(@program) %>
+			<% if @program.applicants %>
+				<%= link_to "View "  + @program.applicants.length.to_s +  " Applicants", program_applicants_path(@program) %>
+			<% end %>
 		<% end %>
 		<% if current_user.role == 'admin' %>
 			 | 

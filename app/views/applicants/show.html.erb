@@ -36,28 +36,36 @@
   <strong>Website:</strong>
   <%=h @applicant.website %>
 </p>
-
 <p>
-	<h1>Statement:</h1>
-	<%=h @applicant.submission.statement %>
+	<strong>Statement:</strong><br />
+	<% if @applicant.submission %>
+		<%=h @applicant.submission.statement %>
+	<% else %>
+		Applicant did not submit a statement
+	<% end %>
 </p>
-
 <p>
 	<h1>Work</h1>
-	<ul class="work">
-		<% for work in @applicant.submission.works %>
-			<li>
-				<strong>Type: </strong><%= work.type.title %><br />
-				<% if work.type.id == 1 %>
-					<%= link_to image_tag(work.image.url(:med)), work.image.url(:large), :alt => work.title, :rel => 'shadowbox[gallery]' %>
-				<% elsif work.type.id == 4 %>
-					<%= link_to work.title, work.document.url %>
-				<% elsif work.type.id == 2 || work.type.id == 3 %>
-					<%= link_to work.title, work.url, :target => :blank %>
-				<% end %>
-			</li>
-		<% end %>
-	</ul>
+	<% if @applicant.submission %>
+		<ul class="work">
+			<% for work in @applicant.submission.works %>
+				<li>
+					<strong>Type: </strong><%= work.type.title %><br />
+					<% if work.type.id == 1 %>
+						<%= link_to image_tag(work.image.url(:med)), work.image.url(:large), :alt => work.title, :rel => 'shadowbox[gallery]' %>
+					<% elsif work.type.id == 2 || work.type.id == 3 %>
+						<%= link_to work.title, work.url, :rel => 'shadowbox[gallery]' %>
+					<% elsif work.type.id == 4 %>
+						<%= link_to work.title, work.document.url, :target => :blank %>
+					<% end %>
+				</li>
+			<% end %>
+		</ul>
+	<% else %>
+		<p>
+			Applicant did not submit any work.
+		</p>
+	<% end %>
 	<div class="clear"></div>
 </p>
 
