@@ -1,0 +1,44 @@
+<p>
+	<%= f.label :type_id %>: 
+	<%= f.select :type_id, Type.all.collect{|p| [p.title, p.id]}%>
+</p>
+<p>
+	<%= f.label :title, "Title/Medium" %>: 
+	<%= f.text_field :title, :size => 75 %>
+</p>
+
+<div id="image_<%= i %>">
+<<<<<<< HEAD
+	<p class="instructions">Please select your discipline from the drop down menu. Visual and literary submissions, click 'Browse' and upload a file from your computer. Sound and video submissions, please provide links examples of your work hosted at an external site.</p>
+=======
+	<p class="instructions">Please select your discipline from the drop down menu. Visual and literary submissions, click 'Browse' and upload a file from your computer. Sound and video submissions, please a provide links examples of your work hosted at an outside site.</p>
+>>>>>>> origin/master
+	<p>
+		<%= f.label :image, "Image File" %>: 
+		<%= f.file_field :image %>
+	</p>
+</div>
+
+<div id="url_<%= i %>">
+<<<<<<< HEAD
+	<p class="instructions">Please select your discipline from the drop down menu. Visual and literary submissions, click 'Browse' and upload a file from your computer. Sound and video submissions, please provide links examples of your work hosted at an external site.</p>
+=======
+	<p class="instructions">Please select your discipline from the drop down menu. Visual and literary submissions, click 'Browse' and upload a file from your computer. Sound and video submissions, please a provide links examples of your work hosted at an outside site.</p>
+>>>>>>> origin/master
+	<p>
+		<%= f.label :url %>: 
+		<%= f.text_field :url, :size => 75 %>
+	</p>
+</div>
+
+<div id="document_<%= i %>">
+<<<<<<< HEAD
+	<p class="instructions">Please select your discipline from the drop down menu. Visual and literary submissions, click 'Browse' and upload a file from your computer. Sound and video submissions, please provide links examples of your work hosted at an external site.</p>
+=======
+	<p class="instructions">Please select your discipline from the drop down menu. Visual and literary submissions, click 'Browse' and upload a file from your computer. Sound and video submissions, please a provide links examples of your work hosted at an outside site.</p>
+>>>>>>> origin/master
+	<p>
+		<%= f.label :document, "Document File" %>: 
+		<%= f.file_field :document %>
+	</p>
+</div>
