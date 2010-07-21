@@ -395,5 +395,4 @@ module Paperclip
       end
     end
   end
-
 end

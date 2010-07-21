@@ -19,13 +19,19 @@ document.observe('dom:loaded', function() {
 		}
 	}
 	
+	function clearValues(thisTarget) {
+		$('submission_works_attributes_' + thisTarget + '_image').clear();
+		$('submission_works_attributes_' + thisTarget + '_url').clear();
+		$('submission_works_attributes_' + thisTarget + '_document').clear();
+	}
+
 	for (var i=0; i<4; i++) {
 		(function(i) {
 			$('submission_works_attributes_' + i + '_type_id').observe('change', function(event) {
 				var index = this.selectedIndex;
 				var option = this.options[index].value;
 				//alert(option);
-				
+				clearValues(i);
 				processSelection(i, option);
 			});
 			
@@ -33,12 +39,10 @@ document.observe('dom:loaded', function() {
 			
 			processSelection(i, $('submission_works_attributes_' + i + '_type_id').options[$('submission_works_attributes_' + i + '_type_id').selectedIndex].value);
 			
-			//$('url_' + i).hide();
-			//$('document_' + i).hide();
-			
 		})(i);
 	}
 
 //  END SUBMISSION TYPE HIDE/SHOW   /////////////////////////////////////
+
 
 });

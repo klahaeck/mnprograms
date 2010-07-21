@@ -3,3 +3,4 @@ log/
 *.log
 public/assets/programs/
 public/assets/submissions/
+log/development.log

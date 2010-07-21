@@ -1,3 +1,8 @@
+<% content_for :head do %>
+	<%= javascript_include_tag 'livevalidation_prototype.compressed' %>
+	<%= javascript_include_tag 'validate_applicant' %>
+<% end %>
+
 <% form_for [@program, @applicant] do |f| %>
 	<%= f.error_messages %>
 	
