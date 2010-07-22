@@ -1,0 +1,137 @@
+
+
+Processing ApplicantsController#new (for 127.0.0.1 at 2010-07-22 09:30:16) [GET]
+  Parameters: {"program_id"=>"csa", "action"=>"new", "controller"=>"applicants"}
+
+ActiveRecord::RecordNotFound (ActiveRecord::RecordNotFound):
+  /usr/local/lib/ruby/gems/1.8/gems/friendly_id-2.3.4/lib/friendly_id/active_record2/slugged_model.rb:12:in `handle_friendly_result'
+  /usr/local/lib/ruby/gems/1.8/gems/friendly_id-2.3.4/lib/friendly_id/active_record2/slugged_model.rb:90:in `find'
+  /usr/local/lib/ruby/gems/1.8/gems/friendly_id-2.3.4/lib/friendly_id/active_record2/finders.rb:32:in `send'
+  /usr/local/lib/ruby/gems/1.8/gems/friendly_id-2.3.4/lib/friendly_id/active_record2/finders.rb:32:in `method_missing'
+  /usr/local/lib/ruby/gems/1.8/gems/friendly_id-2.3.4/lib/friendly_id/active_record2/slugged_model.rb:149:in `find_one'
+  app/controllers/applicants_controller.rb:15:in `new'
+  warden (0.10.7) lib/warden/manager.rb:35:in `call'
+  warden (0.10.7) lib/warden/manager.rb:34:in `catch'
+  warden (0.10.7) lib/warden/manager.rb:34:in `call'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ProgramsController#index (for 127.0.0.1 at 2010-07-22 09:30:19) [GET]
+  Parameters: {"action"=>"index", "controller"=>"programs"}
+Rendering template within layouts/application
+Rendering programs/index
+Completed in 21ms (View: 12, DB: 4) | 200 OK [http://localhost/]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-07-22 09:30:27) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering template within layouts/application
+Rendering sessions/new
+Completed in 76ms (View: 66, DB: 1) | 200 OK [http://localhost/users/login]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-07-22 09:30:39) [POST]
+  Parameters: {"commit"=>"Sign in", "action"=>"create", "authenticity_token"=>"gaNZNeD29isx+/M4ipmLCG11ajjzSmcW/VD3ngheHtU=", "controller"=>"sessions", "user"=>{"remember_me"=>"0", "password"=>"[FILTERED]", "email"=>"admin@root.com"}}
+Redirected to http://localhost:3000/
+Completed in 67ms (DB: 4) | 302 Found [http://localhost/users/login]
+
+
+Processing ProgramsController#index (for 127.0.0.1 at 2010-07-22 09:30:39) [GET]
+  Parameters: {"action"=>"index", "controller"=>"programs"}
+Rendering template within layouts/application
+Rendering programs/index
+Completed in 8ms (View: 6, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing ProgramsController#new (for 127.0.0.1 at 2010-07-22 09:30:41) [POST]
+  Parameters: {"action"=>"new", "authenticity_token"=>"gaNZNeD29isx+/M4ipmLCG11ajjzSmcW/VD3ngheHtU=", "controller"=>"programs"}
+Rendering template within layouts/application
+Rendering programs/new
+Completed in 42ms (View: 36, DB: 2) | 200 OK [http://localhost/programs/new]
+
+
+Processing ProgramsController#create (for 127.0.0.1 at 2010-07-22 09:31:02) [POST]
+  Parameters: {"commit"=>"Save changes", "action"=>"create", "authenticity_token"=>"gaNZNeD29isx+/M4ipmLCG11ajjzSmcW/VD3ngheHtU=", "controller"=>"programs", "program"=>{"title"=>"test", "published"=>"1", "contact"=>"<p>\r\n\tasdfasdf</p>\r\n", "guidlines"=>"<p>\r\n\tasdfasdf</p>\r\n", "start(1i)"=>"2010", "logo"=>#<File:/var/folders/V-/V-wPVhW9HQm6vpGmYyi0eE+++TI/-Tmp-/RackMultipart20100722-61963-1kkjgqi-0>, "start(2i)"=>"7", "start(3i)"=>"22", "description"=>"<p>\r\n\tasdfasdf</p>\r\n", "end(1i)"=>"2010", "end(2i)"=>"7", "thankyou"=>"<p>\r\n\tasdfasdf</p>\r\n", "end(3i)"=>"28"}}
+[paperclip] identify '-format' '%wx%h' '/var/folders/V-/V-wPVhW9HQm6vpGmYyi0eE+++TI/-Tmp-/stream,61963,0.jpg[0]' 2>/dev/null
+[paperclip] convert '/var/folders/V-/V-wPVhW9HQm6vpGmYyi0eE+++TI/-Tmp-/stream,61963,0.jpg[0]' '-resize' '50x50>' '/var/folders/V-/V-wPVhW9HQm6vpGmYyi0eE+++TI/-Tmp-/stream,61963,0,61963,0' 2>/dev/null
+[paperclip] identify '-format' '%wx%h' '/var/folders/V-/V-wPVhW9HQm6vpGmYyi0eE+++TI/-Tmp-/stream,61963,0.jpg[0]' 2>/dev/null
+[paperclip] convert '/var/folders/V-/V-wPVhW9HQm6vpGmYyi0eE+++TI/-Tmp-/stream,61963,0.jpg[0]' '-resize' '257x257>' '/var/folders/V-/V-wPVhW9HQm6vpGmYyi0eE+++TI/-Tmp-/stream,61963,0,61963,1' 2>/dev/null
+[paperclip] identify '-format' '%wx%h' '/var/folders/V-/V-wPVhW9HQm6vpGmYyi0eE+++TI/-Tmp-/stream,61963,0.jpg[0]' 2>/dev/null
+[paperclip] convert '/var/folders/V-/V-wPVhW9HQm6vpGmYyi0eE+++TI/-Tmp-/stream,61963,0.jpg[0]' '-resize' '20x20>' '/var/folders/V-/V-wPVhW9HQm6vpGmYyi0eE+++TI/-Tmp-/stream,61963,0,61963,2' 2>/dev/null
+[paperclip] Saving attachments.
+[paperclip] saving /Users/khaeck/Sites/Rails/mnprograms/public/assets/programs/1/mnartists_logo_small.jpg
+[paperclip] saving /Users/khaeck/Sites/Rails/mnprograms/public/assets/programs/1/mnartists_logo_original.jpg
+[paperclip] saving /Users/khaeck/Sites/Rails/mnprograms/public/assets/programs/1/mnartists_logo_medium.jpg
+[paperclip] saving /Users/khaeck/Sites/Rails/mnprograms/public/assets/programs/1/mnartists_logo_icon.jpg
+Redirected to http://localhost:3000/programs/test
+Completed in 995ms (DB: 5) | 302 Found [http://localhost/programs]
+
+
+Processing ProgramsController#show (for 127.0.0.1 at 2010-07-22 09:31:03) [GET]
+  Parameters: {"action"=>"show", "id"=>"test", "controller"=>"programs"}
+Rendering template within layouts/application
+Rendering programs/show
+Completed in 37ms (View: 32, DB: 2) | 200 OK [http://localhost/programs/test]
+
+
+Processing SessionsController#destroy (for 127.0.0.1 at 2010-07-22 09:31:30) [GET]
+  Parameters: {"action"=>"destroy", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Completed in 35ms (DB: 30) | 302 Found [http://localhost/users/logout]
+
+
+Processing ProgramsController#index (for 127.0.0.1 at 2010-07-22 09:31:30) [GET]
+  Parameters: {"action"=>"index", "controller"=>"programs"}
+Rendering template within layouts/application
+Rendering programs/index
+Completed in 13ms (View: 10, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing ProgramsController#show (for 127.0.0.1 at 2010-07-22 09:31:32) [GET]
+  Parameters: {"action"=>"show", "id"=>"test", "controller"=>"programs"}
+Rendering template within layouts/application
+Rendering programs/show
+Completed in 15ms (View: 10, DB: 1) | 200 OK [http://localhost/programs/test]
+
+
+Processing ProgramsController#show (for 127.0.0.1 at 2010-07-22 09:31:37) [GET]
+  Parameters: {"action"=>"show", "id"=>"test", "controller"=>"programs"}
+Rendering template within layouts/application
+Rendering programs/show
+Completed in 16ms (View: 10, DB: 1) | 200 OK [http://localhost/programs/test]
+
+
+Processing ProgramsController#guidelines (for 127.0.0.1 at 2010-07-22 09:31:39) [GET]
+  Parameters: {"action"=>"guidelines", "id"=>"test", "controller"=>"programs"}
+Rendering template within layouts/application
+Rendering programs/guidelines
+Completed in 16ms (View: 11, DB: 1) | 200 OK [http://localhost/programs/test/guidelines]
+
+
+Processing ProgramsController#show (for 127.0.0.1 at 2010-07-22 09:31:40) [GET]
+  Parameters: {"action"=>"show", "id"=>"test", "controller"=>"programs"}
+Rendering template within layouts/application
+Rendering programs/show
+Completed in 16ms (View: 10, DB: 1) | 200 OK [http://localhost/programs/test]
+
+
+Processing ApplicantsController#new (for 127.0.0.1 at 2010-07-22 09:31:43) [GET]
+  Parameters: {"program_id"=>"test", "action"=>"new", "controller"=>"applicants"}
+Rendering template within layouts/application
+Rendering applicants/new
+Completed in 38ms (View: 28, DB: 2) | 200 OK [http://localhost/programs/test/applicants/new]
+
+
+Processing ProgramsController#show (for 127.0.0.1 at 2010-07-22 09:31:44) [GET]
+  Parameters: {"action"=>"show", "id"=>"test", "controller"=>"programs"}
+Rendering template within layouts/application
+Rendering programs/show
+Completed in 15ms (View: 10, DB: 1) | 200 OK [http://localhost/programs/test]
+
+
+Processing ProgramsController#guidelines (for 127.0.0.1 at 2010-07-22 09:31:45) [GET]
+  Parameters: {"action"=>"guidelines", "id"=>"test", "controller"=>"programs"}
+Rendering template within layouts/application
+Rendering programs/guidelines
+Completed in 15ms (View: 10, DB: 1) | 200 OK [http://localhost/programs/test/guidelines]

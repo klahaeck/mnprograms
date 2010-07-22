@@ -4,3 +4,7 @@ log/
 public/assets/programs/
 public/assets/submissions/
 log/development.log
+log/development.log
+app/views/submissions/_work_fields.html.erb.orig
+log/development.log
+log/production.log
