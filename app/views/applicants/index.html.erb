@@ -14,12 +14,18 @@
   <tr align="left">
     <th>Firstname</th>
     <th>Lastname</th>
+    <th>Resume</th>
     <th>work</th>
   </tr>
   <% for applicant in @applicants %>
     <tr class="<%= cycle('even', 'odd') %>">
       <td><%=h applicant.firstname %></td>
       <td><%=h applicant.lastname %></td>
+      <td>
+      	<% if applicant.submission %>
+      		<%= link_to 'Download', applicant.submission.resume.url %>
+      	<% end %>
+      </td>
 	  <td>
 	    <% if applicant.submission %>
 	  		<ul class="worksmall">

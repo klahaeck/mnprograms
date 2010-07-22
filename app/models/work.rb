@@ -11,7 +11,7 @@ class Work < ActiveRecord::Base
                   :path => ":rails_root/public/assets/submissions/:id/:basename_:style.:extension"
 
   #validates_attachment_presence :image
-  validates_attachment_size :image, :less_than => 2.megabytes
+  validates_attachment_size :image, :less_than => 10.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png', 'image/jpg']
   
   
@@ -20,6 +20,6 @@ class Work < ActiveRecord::Base
                   :path => ":rails_root/public/assets/submissions/:id/:basename.:extension"
 
   #validates_attachment_presence :document
-  validates_attachment_size :document, :less_than => 2.megabytes
+  validates_attachment_size :document, :less_than => 10.megabytes
   #validates_attachment_content_type :document, :content_type => ['application/pdf', 'application/msword']
 end

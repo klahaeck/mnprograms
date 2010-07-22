@@ -4,7 +4,7 @@ class Submission < ActiveRecord::Base
   belongs_to :applicant
   has_many :works, :dependent => :destroy
   
-  has_attached_file :resume, :styles => { :small => "150x150>" },
+  has_attached_file :resume,
                   :url  => "/assets/submissions/:id/:basename.:extension",
                   :path => ":rails_root/public/assets/submissions/:id/:basename.:extension"
 

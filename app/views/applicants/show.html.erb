@@ -45,6 +45,12 @@
 	<% end %>
 </p>
 <p>
+	<strong>Resume</strong> 
+	<% if @applicant.submission %>
+		<%= link_to 'Download', @applicant.submission.resume.url %>
+	<% end %>
+</p>
+<p>
 	<h1>Work</h1>
 	<% if @applicant.submission %>
 		<ul class="work">
