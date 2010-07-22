@@ -5,7 +5,7 @@ class Submission < ActiveRecord::Base
   has_many :works, :dependent => :destroy
   
   has_attached_file :resume,
-                  :url  => "/assets/submissions/:id/:basename.:extension",
+                  :url  => "#{ActionController::Base.relative_url_root}/assets/submissions/:id/:basename.:extension",
                   :path => ":rails_root/public/assets/submissions/:id/:basename.:extension"
 
   #validates_attachment_presence :resume

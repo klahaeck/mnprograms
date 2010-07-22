@@ -7,7 +7,7 @@ class Work < ActiveRecord::Base
   validates_presence_of :title
   
   has_attached_file :image, :styles => { :icon => "55x55>", :small => "100x100>", :med => "200x200>", :large => "800x800>" },
-                  :url  => "/assets/submissions/:id/:basename_:style.:extension",
+                  :url  => "#{ActionController::Base.relative_url_root}/assets/submissions/:id/:basename_:style.:extension",
                   :path => ":rails_root/public/assets/submissions/:id/:basename_:style.:extension"
 
   #validates_attachment_presence :image
@@ -16,7 +16,7 @@ class Work < ActiveRecord::Base
   
   
   has_attached_file :document,
-                  :url  => "/assets/submissions/:id/:basename.:extension",
+                  :url  => "#{ActionController::Base.relative_url_root}/assets/submissions/:id/:basename.:extension",
                   :path => ":rails_root/public/assets/submissions/:id/:basename.:extension"
 
   #validates_attachment_presence :document
