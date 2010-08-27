@@ -11,6 +11,6 @@
 
 <p>
   <%= link_to "Edit", edit_submission_path(@submission) %> |
-  <%= link_to "Destroy", @submission, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "Destroy", @submission, :confirm => 'Are you sure?', :method => :delete, :class => 'caution' %> |
   <%= link_to "View All", applicant_submissions_path(@submission.applicant_id) %>
 </p>

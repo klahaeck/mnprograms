@@ -1,6 +1,6 @@
 class SubmissionsController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:new, :create]
+  before_filter :authenticate_admin!, :only => [:edit, :update, :destroy]
   
   def index
   	@applicant = Applicant.find(params[:applicant_id])
@@ -35,18 +35,25 @@ class SubmissionsController < ApplicationController
   end
   
   def edit
-  	@applicant = Applicant.find(params[:applicant_id])
-  	@program = Program.find(@applicant.program_id)
     @submission = Submission.find(params[:id])
+    @applicant = @submission.applicant
+  	@program = Program.find(@applicant.program_id)
+  	
+  	totalsubs = @submission.works.count
+  	totalleft = 4 - totalsubs
+  	
+  	totalleft.times do
+    	work = @submission.works.build
+    end
   end
   
-  def update
-  	@applicant = Applicant.find(params[:applicant_id])
-  	@program = Program.find(@applicant.program_id)
+  def update  	
     @submission = Submission.find(params[:id])
+    @applicant = @submission.applicant
+    @program = Program.find(@applicant.program_id)
     if @submission.update_attributes(params[:submission])
       flash[:notice] = "Successfully updated submission."
-      redirect_to @submission
+      redirect_to @applicant
     else
       render :action => 'edit'
     end

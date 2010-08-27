@@ -8,3 +8,8 @@ log/development.log
 app/views/submissions/_work_fields.html.erb.orig
 log/development.log
 log/production.log
+*.log
+DESIGN/
+*.log
+log/development.log
+log/production.log

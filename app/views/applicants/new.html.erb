@@ -1,7 +1,15 @@
 <%= render 'layouts/programtop' %>
 
 <div id="content">
-	<%= render :partial => 'form' %>
+	<% if admin_signed_in? %>
+		<%= render :partial => 'new_form' %>
+	<% elsif DateTime.now > @program.end %>
+		<p>This Program is no longer accepting submissions.</p>
+	<% elsif DateTime.now < @program.start %>
+		<p>This Program is not accepting submissions until <%= @program.start.strftime('%b %d, %Y') %>.</p>
+	<% else %>
+		<%= render :partial => 'new_form' %>
+	<% end %>
 </div>
 
 <%= render 'layouts/programbot' %>

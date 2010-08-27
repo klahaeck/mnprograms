@@ -3,18 +3,20 @@
 	<%= stylesheet_link_tag 'show' %>
 <% end %>
 
-<% if user_signed_in? %>
+<% if admin_signed_in? %>
 	<div id="admincontrols">
-		<% if @program.users.include?(current_user) || current_user.role == 'admin' %>
-			<% if @program.applicants %>
-				<%= link_to "View "  + @program.applicants.length.to_s +  " Applicants", program_applicants_path(@program) %>
-			<% end %>
+		<% if @program.applicants %>
+			<%= link_to "View "  + @program.applicants.length.to_s +  " Applicants", program_applicants_path(@program) %>
 		<% end %>
-		<% if current_user.role == 'admin' %>
-			 | 
-			<%= link_to "View All Programs", programs_path %> | 
-			<%= link_to "Edit", edit_program_path(@program) %> |
-			<%= link_to "Destroy", @program, :confirm => 'Are you sure?', :method => :delete %>
+		 | 
+		<%= link_to "View All Programs", programs_path %> | 
+		<%= link_to "Edit", edit_program_path(@program) %> |
+		<%= link_to "Destroy", @program, :confirm => 'Are you sure?', :method => :delete, :class => 'caution' %>
+	</div>
+<% elsif juror_signed_in? %>
+	<div id="admincontrols">
+		<% if @program.applicants %>
+			<%= link_to "View Applicants", program_applicants_path(@program) %>
 		<% end %>
 	</div>
 <% end %>

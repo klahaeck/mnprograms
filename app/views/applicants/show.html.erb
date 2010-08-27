@@ -5,7 +5,20 @@
 <% end %>
 
 <div id="admincontrols">
-	<%= link_to "Back to Program", @applicant.program %>
+	<%= link_to "All Applicants", program_applicants_path(@applicant.program) %>
+	<% if admin_signed_in? %>
+		 | <%= link_to "Edit", edit_applicant_path(@applicant) %> | 
+		<%= link_to "Destroy", @applicant, :confirm => 'Are you sure?', :method => :delete, :class => 'caution' %>
+	<% end %>
+	<p>
+		<% if juror_signed_in? %>
+			<strong>Your Rating</strong>
+			<%= ratings_for @applicant, :show_user_rating => true %>
+		<% else %>
+			<strong>Avg. Rating</strong>
+			<%= ratings_for @applicant, :static %>
+		<% end %>
+	</p>
 </div>
 
 <% title @applicant.program.title + " Applicant" %>
@@ -74,10 +87,3 @@
 	<% end %>
 	<div class="clear"></div>
 </p>
-
-<% if current_user.role == 'admin' %>
-	<p>
-		<%= link_to "Destroy", @applicant, :confirm => 'Are you sure?', :method => :delete %> |
-		<%= link_to "View All", program_applicants_path(@applicant.program) %>
-	</p>
-<% end %>

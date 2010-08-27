@@ -15,7 +15,7 @@
       <td><%=h work.url %></td>
       <td><%= link_to "Show", work %></td>
       <td><%= link_to "Edit", edit_work_path(work) %></td>
-      <td><%= link_to "Destroy", work, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to "Destroy", work, :confirm => 'Are you sure?', :method => :delete, :class => 'caution' %></td>
     </tr>
   <% end %>
 </table>

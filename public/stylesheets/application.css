@@ -17,11 +17,15 @@ a img {
 a {
 	text-decoration: none;
 	outline: none;
-	color: #333333;
+	color: green;
 }
 
 a:hover {
 	text-decoration: underline;
+}
+
+.caution {
+	color: red;
 }
 
 p {
@@ -135,7 +139,6 @@ td {
 	background-color: #CCC;
 	padding: 10px 20px 10px 20px;
 	text-align: right;
-	color: green;
 }
 
 #user_nav h2 {
@@ -251,6 +254,18 @@ td {
 .tablerow_odd {
 
 	
+}
+
+#jurors {
+	float: right;
+}
+
+ul.jurors {
+	list-style: none;
+}
+
+ul.jurors li {
+	float: right;
 }
 
 .editcontrols {

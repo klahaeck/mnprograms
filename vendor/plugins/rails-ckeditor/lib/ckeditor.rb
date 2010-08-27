@@ -123,7 +123,7 @@ module Ckeditor
 end
 
 
-include ActionView
+=begin include ActionView
 module ActionView::Helpers::AssetTagHelper
   alias_method :rails_javascript_include_tag, :javascript_include_tag
 
@@ -141,6 +141,7 @@ module ActionView::Helpers::AssetTagHelper
     [main_sources.join("\n"), application_source].join("\n")
   end
 end
+=end
 
 module ActionView::Helpers
 	class FormBuilder
@@ -150,4 +151,5 @@ module ActionView::Helpers
     	ckeditor_textarea(@object_name, method, objectify_options(options))
     end
 	end
+
 end

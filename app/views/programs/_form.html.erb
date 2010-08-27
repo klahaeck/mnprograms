@@ -1,5 +1,5 @@
 <% content_for :head do %>
-	<%= javascript_include_tag :ckeditor %>
+	<%= javascript_include_tag 'ckeditor/ckeditor.js' %>
 <% end %>
 
 <% form_for @program, :html => { :multipart => true } do |f| %>
@@ -9,8 +9,8 @@
   <div id="usersform">
   	<%= f.label :jurors %>:<br />
   	<span class="instructions">You may select multiple jurors.</span><br />
-  	<%= select_tag "program[user_ids][]", options_from_collection_for_select(User.all, "id", "username"), :multiple => true, :size => 2 %><br />
-  	<%= link_to "Add User", new_user_path %>
+  	<%= select_tag "program[juror_ids][]", options_from_collection_for_select(Juror.all, "id", "name"), :multiple => true, :size => 2 %><br />
+  	<%= link_to "Add Juror", new_juror_path %>
   </div>
   
   <p>

@@ -1,6 +1,6 @@
 class WorksController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:new, :create]
+  before_filter :authenticate_admin!, :except => [:new, :create, :index, :show]
 
   def index
     @works = Work.all

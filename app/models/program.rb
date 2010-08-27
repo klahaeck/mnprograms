@@ -10,7 +10,7 @@ class Program < ActiveRecord::Base
   validates_uniqueness_of :title
   
   has_many :jurorships
-  has_many :users, :through => :jurorships
+  has_many :jurors, :through => :jurorships
   
   has_many :applicants
   

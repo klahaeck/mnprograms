@@ -11,7 +11,7 @@
       <td><%=h submission.statement %></td>
       <td><%= link_to "Show", submission %></td>
       <td><%= link_to "Edit", edit_submission_path(submission) %></td>
-      <td><%= link_to "Destroy", submission, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to "Destroy", submission, :confirm => 'Are you sure?', :method => :delete, :class => 'caution' %></td>
     </tr>
   <% end %>
 </table>

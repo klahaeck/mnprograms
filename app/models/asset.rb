@@ -15,7 +15,7 @@ class Asset < ActiveRecord::Base
   # =======================
 
   
-  belongs_to :user
+  belongs_to :admin
   belongs_to :assetable, :polymorphic => true
   
   def url(*args)

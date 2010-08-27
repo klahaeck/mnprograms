@@ -1,15 +1,19 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout' }
+  map.devise_for :jurors, :path_names => { :sign_in => 'login', :sign_out => 'logout' }
   
-  map.resources :users
+  map.devise_for :admins, :path_names => { :sign_in => 'login', :sign_out => 'logout' }
+  
+  map.resources :admins
+  
+  map.resources :jurors
   
   map.resources :types
   
   map.resources :works
 
   map.resources :programs do |program|
-  	program.resources :applicants, :shallow => true do |applicant|
+  	program.resources :applicants, :member => {:rate => :post}, :shallow => true do |applicant|
   		applicant.resources :submissions, :shallow => true
   	end
   end
