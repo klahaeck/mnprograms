@@ -1,0 +1,46 @@
+<% content_for :head do %>
+	<%= javascript_include_tag 'submission_form_scripts' %>
+	<%= javascript_include_tag 'livevalidation_prototype.compressed' %>
+	<%= javascript_include_tag 'validate_submission' %>
+<% end %>
+
+<div id="admincontrols">
+	<%= link_to "Back to applicant info", edit_applicant_path(@submission.applicant) %> | 
+	<%= link_to "All Applicants", program_applicants_path(@program) %>
+</div>
+	
+<h1><%= @submission.applicant.firstname + " " + @submission.applicant.lastname %>'s Work</h1>
+<p>
+	<span class="required">*</span><span class="instructions"> = Required Field</span>
+</p>
+
+<% form_for @submission, :html => { :multipart => true } do |f| %>
+  <%= f.error_messages %>
+  
+  <p>
+  	<span class="instructions">A brief artist's statement which includes a proposal for the work you would create for the project.<br />Why is this work a good fit for the Community Supported Art program? (500 words max)</span><br />
+    <%= f.label :statement %><span class="required">*</span><br />
+    <%= f.text_area :statement, :cols => 78, :rows => 10 %>
+  </p>
+  <p>
+  	<span class="instructions">One page resume.  Please organize your accomplishments into sections (for example: education, employment/professional experience, exhibitions, awards, publications, miscellaneous) and save your resume as a pdf.  Click 'Browse' to upload your file from you computer.</span><br />
+  	<%= f.label :resume %><span class="required">*</span>
+  	<%= f.file_field :resume %>
+  </p>
+  <% i = 0 %>
+  <% f.fields_for :works do |builder| %>
+  	<div class="submit_<%= cycle("odd", "even") %>" id="work_<%= i %>">
+  		<!--<button id="removeWork">Remove</button>-->
+		<%= render 'work_fields', :f => builder, :i => i %>
+	</div>
+	<% i += 1 %>
+  <% end %>
+  
+  <!--<button id="addWorkLink">Add Work</button>-->
+  
+  <p>
+	<span class="required">*</span><span class="instructions"> = Required Field</span>
+  </p>
+  
+  <p><%= f.submit "Save" %></p>
+<% end %>

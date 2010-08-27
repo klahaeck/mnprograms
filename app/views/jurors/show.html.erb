@@ -1,0 +1,22 @@
+<% title "Juror" %>
+
+<p>
+  <strong>Name:</strong>
+  <%=h @juror.name %>
+</p>
+<p>
+  <strong>Email:</strong>
+  <%=h @juror.email %>
+</p>
+<p>
+  <strong>Programs:</strong>
+  <% for program in @juror.programs %>
+  	<%=h program.title %> 
+  <% end %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_juror_path(@juror) %> |
+  <%= link_to "Destroy", @juror, :confirm => 'Are you sure?', :method => :delete, :class => 'caution' %> |
+  <%= link_to "View All", jurors_path %>
+</p>

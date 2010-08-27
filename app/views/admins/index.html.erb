@@ -1,0 +1,22 @@
+<div id="admincontrols">
+	<%= link_to "Back to Programs", root_url %>
+</div>
+
+<% title "Admins" %>
+
+<table>
+  <tr>
+    <th>Username</th>
+    <th>Email</th>
+  </tr>
+  <% for admin in @admins %>
+    <tr>
+      <td><%=h admin.username %></td>
+      <td><%=h admin.email %></td>
+      <td><%= link_to "Edit", edit_admin_path(admin) %></td>
+	  <td><%= link_to "Destroy", admin, :confirm => 'Are you sure?', :method => :delete, :class => 'caution' %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Admin", new_admin_path %></p>

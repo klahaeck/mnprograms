@@ -1,0 +1,32 @@
+<div id="admincontrols">
+	<%= link_to "Back to Programs", root_url %>
+</div>
+
+<% title "Jurors" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Programs</th>
+  </tr>
+  <% for juror in @jurors %>
+    <tr>
+      <td><%=h juror.name %></td>
+      <td><%=h juror.email %></td>
+      <td>
+      	<% for program in juror.programs %>
+      		<%= link_to program.title, program %>
+      	<% end %>
+      </td>
+      <% if admin_signed_in? %>
+	      <td><%= link_to "Edit", edit_juror_path(juror) %></td>
+	      <td><%= link_to "Destroy", juror, :confirm => 'Are you sure?', :method => :delete, :class => 'caution' %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<% if admin_signed_in? %>
+	<p><%= link_to "New Juror", new_juror_path %></p>
+<% end %>
