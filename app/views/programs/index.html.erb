@@ -14,7 +14,7 @@
 		<th align="left">jurors</th>
 	<% end %>
 	<% for program in @programs %>
-		<% if program.published == true || user_signed_in? || juror_signed_in? %>
+		<% if program.published == true || admin_signed_in? || juror_signed_in? %>
 		    <tr align="left" valign="top" class="tablerow_<%= cycle("even", "odd") %>">
 		      <td width="50px"><%= link_to image_tag(program.logo.url(:icon)), program %></td>
 		      <td><strong><%=h link_to program.title, program %></strong></td>
