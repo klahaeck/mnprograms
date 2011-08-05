@@ -1,11 +1,11 @@
 one:
   submission_id: 1
-  type_id: 1
+  type: MyString
   title: MyString
   url: MyString
 
 two:
   submission_id: 1
-  type_id: 1
+  type: MyString
   title: MyString
   url: MyString

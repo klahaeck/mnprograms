@@ -1,0 +1,31 @@
+<div id="navbar">
+	
+	<ul id="tools">
+		<% if can? :read, @program.submissions %>
+			<% if @program.submissions.count > 0 %>
+				<li><%= link_to "View " + @program.submissions.count.to_s + " Submissions", program_submissions_path(@program), :id => 'view_submissions_link' %></li>
+			<% else %>
+				<li><p class="toolbar">There are no submmissions</p></li>
+			<% end %>
+		<% end %>
+	
+		<% if (can? :create, Submission) && !current_user.submission(@program) %>
+			<li><%= link_to "Submit Your Work", new_program_submission_path(@program), :id => 'new_work_button' %></li>
+		<% end %>
+		
+		<% if current_submission(@program) && (can? :update, current_submission(@program)) %>
+			<li><%= link_to 'Edit Your Submission', edit_program_submission_path(@program, current_submission(@program)), :id => 'edit_work_button' %></li>
+		<% end %>
+		
+		<% if !user_signed_in? %>
+			<li><p class="toolbar">You must create an account or sign in to submit your work.</p></li>
+		<% end %>
+	</ul>
+	
+	<ul id="pages">
+		<li><%= link_to 'Home', program_path(@program) %></li>
+		<li><%= link_to 'Description', description_program_path(@program) %></li>
+		<li><%= link_to 'Guidelines', guidelines_program_path(@program) %></li>
+	</ul>
+	
+</div>

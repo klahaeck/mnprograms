@@ -1,1 +1,9 @@
-<%= render :partial => 'new_form' %>
+<% title @program.title %>
+
+<% content_for :navbar do %>
+	<%= render 'layouts/navbar' %>
+<% end %>
+
+<h2>New Submission</h2>
+
+<%= render 'form' %>

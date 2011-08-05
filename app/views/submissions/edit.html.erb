@@ -1,1 +1,9 @@
-<%= render :partial => 'edit_form' %>
+<% title @program.title %>
+
+<% content_for :navbar do %>
+	<%= render 'layouts/navbar' %>
+<% end %>
+
+<h2>Edit Submission</h2>
+
+<%= render 'form' %>

@@ -1,0 +1,35 @@
+<section id="deviseauth">
+    <h2>Authentication Services - Setting</h2>
+	
+	<% if @services.count > 0 %>
+	    <div id="currservices">
+	        <h3>The following <%= @services.count == 1 ? 'account is' : 'accounts are' %> connected with your local account</h3>
+    
+	        <% @services.each do |service| %>  
+	          <div class="services_used">  
+	              <%= image_tag "service_icons/#{service.provider}_64.png", :size => "64x64" %>
+	              <div class = "user">
+	                <div class="line1">Name: <%= service.uname %> (ID: <%= service.uid %>)</div>  
+	                <div class="line2">Email: <%= service.uemail != '' ? service.uemail : 'not set' %></div>
+	                <div class="line3">
+	                    <% @services.count == 1 ? @msg = 'Removing the last account linked might lock you out of your account if you do not know the email/password sign-in of your local account!' : @msg = '' %>
+	                    <%= link_to "Remove this service", service, :confirm => 'Are you sure you want to remove this authentication service? ' + @msg, :method => :delete, :class => "remove" %>
+	                </div>
+	              </div>
+	          </div>  
+	        <% end %>
+	    </div>
+	<% else %>
+		<h3>There are no services connected to your account.</h3>
+	    <div id="availableservices">
+	        <h3>You can connect any of these services to your account:</h3>
+	        <div id="services">
+	            <a href="/auth/facebook" class="services"><%= image_tag "service_icons/facebook_64.png", :size => "64x64",  :alt => "Facebook" %></a>
+	            <a href="/auth/google" class="services"><%= image_tag "service_icons/google_64.png", :size => "64x64",  :alt => "Google" %></a>
+	            <!--<a href="/auth/twitter" class="services"><%= image_tag "service_icons/twitter_64.png", :size => "64x64",  :alt => "Twitter" %></a>-->
+	        </div>
+	        <!--<h4>If you signed-up via an authentication service a random password has been set for the local password. You can request a new password using the "Forgot your Password?" link on the sign-in page.</h4>-->
+	    </div>
+	<% end %>
+</section>
+

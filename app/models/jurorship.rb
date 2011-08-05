@@ -1,4 +1,4 @@
 class Jurorship < ActiveRecord::Base
-	belongs_to :juror
-	belongs_to :program
+  belongs_to :program
+  belongs_to :user
 end

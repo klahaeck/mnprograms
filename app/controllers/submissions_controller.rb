@@ -1,70 +1,66 @@
 class SubmissionsController < ApplicationController
 
-  before_filter :authenticate_admin!, :only => [:edit, :update, :destroy]
-  
+	load_and_authorize_resource :program
+	load_and_authorize_resource :submission, :through => :program, :except => [:index]
+	
   def index
-  	@applicant = Applicant.find(params[:applicant_id])
-    @submissions = @applicant.build_submission
+    @submissions = @program.submissions.page(params[:page])
+    authorize! :read, @submissions
+    render :layout => 'program'
   end
-  
+
   def show
-  	@submission = Submission.find(params[:id])
-    @applicant = Applicant.find(@submission.applicant_id)
+    render :layout => 'program'
   end
-  
+
   def new
-  	@applicant = Applicant.find(params[:applicant_id])
-  	@program = Program.find(@applicant.program_id)
-    @submission = @applicant.build_submission
-    4.times do
-    	work = @submission.works.build
-    end
+    if current_user.submission(@program)
+      redirect_to @program, :notice  => "You have already submitted your work for this program"
+  	else
+  	  maxwork = @program.max_work
+    	maxwork.times do
+    		work = @submission.works.build
+    	end
+    	render :layout => 'program'
+	  end
   end
-  
+
   def create
-  	@applicant = Applicant.find(params[:applicant_id])
-  	@program = Program.find(@applicant.program_id)
-    @submission = @applicant.build_submission(params[:submission])
-   
-  	if @submission.save
-      flash[:notice] = "You have successfully submitted your content!"
-      redirect_to program_url(@program) + '/thankyou'
+    @submission.user_id = current_user.id
+    if @submission.save
+      redirect_to program_path(@program) + '/thankyou', :notice => "Successfully created submission."
     else
       render :action => 'new'
     end
   end
-  
+
   def edit
-    @submission = Submission.find(params[:id])
-    @applicant = @submission.applicant
-  	@program = Program.find(@applicant.program_id)
-  	
-  	totalsubs = @submission.works.count
-  	totalleft = 4 - totalsubs
-  	
-  	totalleft.times do
-    	work = @submission.works.build
-    end
+    maxwork = @program.max_work
+  	maxwork.times do
+  		work = @submission.works.build
+  	end
+    render :layout => 'program'
   end
-  
-  def update  	
-    @submission = Submission.find(params[:id])
-    @applicant = @submission.applicant
-    @program = Program.find(@applicant.program_id)
+
+  def update
     if @submission.update_attributes(params[:submission])
-      flash[:notice] = "Successfully updated submission."
-      redirect_to @applicant
+      redirect_to program_submission_path(@program, @submission), :notice  => "Successfully updated submission."
     else
       render :action => 'edit'
     end
   end
-  
+
   def destroy
-  	@applicant = Applicant.find(params[:applicant_id])
-  	@program = Program.find(@applicant.program_id)
-    @submission = Submission.find(params[:id])
     @submission.destroy
-    flash[:notice] = "Successfully destroyed submission."
-    redirect_to @applicant
+    if can? :read, @program.submissions
+      redirect_to program_submissions_path(@program), :notice => "Successfully destroyed submission."
+    else
+      redirect_to @program
+    end
   end
+  
+  def rate
+    @submission.rate(params[:stars], current_user, params[:dimension])
+  end
+
 end

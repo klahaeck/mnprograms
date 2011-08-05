@@ -1,23 +1,28 @@
-<% title "Works" %>
+<% title link_to(@program.title, named_program_path(@program)) %>
+
+<% content_for :navbar do %>
+	<%= render 'layouts/navbar' %>
+<% end %>
+
+<h3>Works</h3>
 
 <table>
   <tr>
     <th>Submission</th>
     <th>Type</th>
     <th>Title</th>
-    <th>Url</th>
+    <th>Link</th>
   </tr>
   <% for work in @works %>
     <tr>
-      <td><%=h work.submission_id %></td>
-      <td><%=h work.type_id %></td>
-      <td><%=h work.title %></td>
-      <td><%=h work.url %></td>
-      <td><%= link_to "Show", work %></td>
-      <td><%= link_to "Edit", edit_work_path(work) %></td>
-      <td><%= link_to "Destroy", work, :confirm => 'Are you sure?', :method => :delete, :class => 'caution' %></td>
+      <td><%= work.submission_id %></td>
+      <td><%= work.type %></td>
+      <td><%= work.title %></td>
+      <td><%= work.link %></td>
+      <td><%= link_to "Show", submission_work_path(:submission) %></td>
+      <td><%= link_to "Destroy", work, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
 </table>
 
-<p><%= link_to "New Work", new_work_path %></p>
+<p><%= link_to "New Works", new_submission_work_path(@program.url, @submission) %></p>

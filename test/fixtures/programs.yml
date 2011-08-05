@@ -1,9 +1,21 @@
 one:
   title: MyString
-  guidlines: MyText
+  url: MyString
+  description: MyText
+  guidelines: MyText
   contact: MyText
+  thankyou: MyText
+  start: 2011-02-27 14:16:25
+  end: 2011-02-27 14:16:25
+  published: false
 
 two:
   title: MyString
-  guidlines: MyText
+  url: MyString
+  description: MyText
+  guidelines: MyText
   contact: MyText
+  thankyou: MyText
+  start: 2011-02-27 14:16:25
+  end: 2011-02-27 14:16:25
+  published: false

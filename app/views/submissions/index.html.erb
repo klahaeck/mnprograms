@@ -1,17 +1,53 @@
-<% title "Submissions" %>
+<% content_for :head do %>
+	<%= stylesheet_link_tag "/javascripts/fancybox/jquery.fancybox-1.3.4.css" %>
+	<%= javascript_include_tag "fancybox/jquery.fancybox-1.3.4.pack", 'fancybox.config' %>
+<% end %>
 
+<% title @program.title + " Submissions" %>
+
+<% content_for :navbar do %>
+	<%= render 'layouts/navbar' %>
+<% end %>
+
+<% if @submissions.count > 0 %>
 <table>
   <tr>
-    <th>Applicant</th>
-    <th>Statement</th>
+    <th>User</th>
+    <th>Resume</th>
+	<th>Work</th>
+	<% if can? :read, Rate %>
+		<th>Avg. Rating</th>
+	<% end %>
   </tr>
   <% for submission in @submissions %>
     <tr>
-      <td><%=h submission.applicant_id %></td>
-      <td><%=h submission.statement %></td>
-      <td><%= link_to "Show", submission %></td>
-      <td><%= link_to "Edit", edit_submission_path(submission) %></td>
-      <td><%= link_to "Destroy", submission, :confirm => 'Are you sure?', :method => :delete, :class => 'caution' %></td>
+      <td><%= submission.user.email %></td>
+      <td><%= link_to submission.resume.file.filename, submission.resume.url if submission.resume? %></td>
+	  <td>
+		<ul>
+		  	<% for work in submission.works %>
+				<li><%= link_to image_tag(work.image_url(:thumb)), work.image_url(:large), :title => work.title, :class => 'fancy', :rel => 'submission_' + submission.id.to_s if work.image? %></li>
+			<% end %>
+		</ul>
+	  </td>
+	  <% if can? :read, Rate %>
+	  	<td><%= ratings_for submission, :static, :remote_options => {:url => rate_program_submission_path(@program, submission)} %></td>
+	  <% end %>
+      <td>
+		<%= link_to "Show", program_submission_path(@program, submission) %> | 
+      	<% if can? :update, submission %>
+			<%= link_to "Edit", edit_program_submission_path(@program, submission) %> | 
+		<% end %>
+		<% if can? :delete, submission %>
+      		<%= link_to "Destroy", program_submission_path(@program, submission), :confirm => 'Are you sure?', :method => :delete, :class => 'warning' %>
+	  	<% end %>
+	  </td>
     </tr>
   <% end %>
 </table>
+
+<%= paginate @submissions %>
+
+<% else %>
+	<h3>There are no submissions for this program</h3>
+<% end %>

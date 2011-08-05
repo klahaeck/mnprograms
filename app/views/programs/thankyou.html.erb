@@ -1,9 +1,24 @@
-<%= render 'layouts/programtop' %>
+<% content_for :head do %>
+	<%= stylesheet_link_tag @program.style_url if @program.style? %>
+<% end %>
 
-<div id="content">
-	<div id="thankyou">
-		<%= @program.thankyou %>
-	</div>
-</div>
+<% if @program.logo? %>
+	<%= image_tag @program.logo_url(:thumb) %>
+<% else %>
+	<% title @program.title %>
+<% end %>
 
-<%= render 'layouts/programbot' %>
+<% content_for :navbar do %>
+	<%= render 'layouts/navbar' %>
+<% end %>
+
+<%=raw @program.thankyou %>
+
+<% if can? :update, @program %>
+	<p>
+	  <%= link_to "Edit Program", edit_program_path(@program) %>
+	  <% if can? :delete, @program %>
+	   | <%= link_to "Destroy Program", @program, :confirm => 'Are you sure?', :method => :delete, :class => 'warning' %>
+	  <% end %>
+	</p>
+<% end %>

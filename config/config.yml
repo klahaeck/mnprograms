@@ -1,0 +1,16 @@
+defaults: &defaults
+    site_name: MN Programs
+
+development:
+    <<: *defaults
+    facebook_app_id: 157733777613019
+    facebook_app_secret: 1bb826ff2ddba27f563d39d8f8c5a7df
+
+test:
+    <<: *defaults
+    <<: *development
+
+production:
+    <<: *defaults
+    facebook_app_id: 187685144603312
+    facebook_app_secret: f1c6e91c60ba94a937b8ce2fcd3099d4

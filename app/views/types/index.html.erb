@@ -6,10 +6,11 @@
   </tr>
   <% for type in @types %>
     <tr>
-      <td><%=h type.title %></td>
-      <td><%= link_to "Show", type %></td>
-      <td><%= link_to "Edit", edit_type_path(type) %></td>
-      <td><%= link_to "Destroy", type, :confirm => 'Are you sure?', :method => :delete, :class => 'caution' %></td>
+      <td><%= type.title %></td>
+	  <td>
+	      <%= link_to "Edit", edit_type_path(type) %> | 
+	      <%= link_to "Destroy", type, :confirm => 'Are you sure?', :method => :delete %>
+	  </td>
     </tr>
   <% end %>
 </table>

@@ -1,67 +1,50 @@
-ActionController::Routing::Routes.draw do |map|
-
-  map.devise_for :jurors, :path_names => { :sign_in => 'login', :sign_out => 'logout' }
+Mnprograms::Application.routes.draw do
   
-  map.devise_for :admins, :path_names => { :sign_in => 'login', :sign_out => 'logout' }
+  resources :types
   
-  map.resources :admins
+  resources :users, :only => [:create]
   
-  map.resources :jurors
-  
-  map.resources :types
-  
-  map.resources :works
-
-  map.resources :programs do |program|
-  	program.resources :applicants, :member => {:rate => :post}, :shallow => true do |applicant|
-  		applicant.resources :submissions, :shallow => true
-  	end
+  devise_for :users, :controllers => { :registrations => "registrations" }, :skip => [:sessions] do
+    get 'signup' => 'registrations#new', :as => :new_user_registration
+    get 'account' => 'registrations#edit', :as => :edit_user_registration
+    get 'signin' => 'devise/sessions#new', :as => :new_user_session
+    post 'signin' => 'devise/sessions#create', :as => :user_session
+    get 'signout' => 'devise/sessions#destroy', :as => :destroy_user_session
   end
   
-  map.connect 'programs/:id/guidelines', :controller => 'programs', :action => 'guidelines'
-  map.connect 'programs/:id/thankyou', :controller => 'programs', :action => 'thankyou'
+  resources :users, :except => [:create]
   
-  map.root :programs
+  resources :profiles
   
-  # The priority is based upon order of creation: first created -> highest priority.
-
-  # Sample of regular route:
-  #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   map.resources :products
-
-  # Sample resource route with options:
-  #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
-
-  # Sample resource route with sub-resources:
-  #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
+  match '/auth/:service/callback' => 'services#create' 
+  resources :services, :only => [:index, :create, :destroy]
   
-  # Sample resource route with more complex sub-resources
-  #   map.resources :products do |products|
-  #     products.resources :comments
-  #     products.resources :sales, :collection => { :recent => :get }
-  #   end
+  resources :programs do
 
-  # Sample resource route within a namespace:
-  #   map.namespace :admin do |admin|
-  #     # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
-  #     admin.resources :products
-  #   end
+    resources :submissions do
+  		resources :works
+	
+  		member do
+  		  post :rate
+		  end
+  	end
 
-  # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  # map.root :controller => "welcome"
+    member do
+      put :set_default
+      get :description
+      get :guidelines
+      get :thankyou
+    end
 
-  # See how all your routes lay out with "rake routes"
+  end
+  
+  
+=begin  match '/:url', :to => 'programs#show'
+  match '/:url/description', :to => 'programs#description', :method => :get
+  match '/:url/guidelines', :to => 'programs#guidelines', :method => :get
+  match '/:url/thankyou', :to => 'programs#thankyou', :method => :get
+=end  
+  
+  root :to => "programs#index"
 
-  # Install the default routes as the lowest priority.
-  # Note: These default routes make all actions in every controller accessible via GET requests. You should
-  # consider removing or commenting them out if you're using named routes and resources.
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
 end

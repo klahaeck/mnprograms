@@ -1,25 +1,12 @@
 class Work < ActiveRecord::Base
-  #attr_accessible :submission_id, :type_id, :title, :url, :image, :document
+  attr_accessible :submission_id, :type_id, :title, :link, :image, :image_cache
+  
+  mount_uploader :image, ImageUploader
   
   belongs_to :submission
   belongs_to :type
   
-  validates_presence_of :title
+  validates :title, :presence => true
+  # validates_size_of :image, :maximum => 2000000, :message => "The image file is too big, it must be smaller than 2 MB!"
   
-  has_attached_file :image, :styles => { :icon => "55x55>", :small => "100x100>", :med => "200x200>", :large => "800x800>" },
-                  :url  => "#{ActionController::Base.relative_url_root}/assets/submissions/:id/:basename_:style.:extension",
-                  :path => ":rails_root/public/assets/submissions/:id/:basename_:style.:extension"
-
-  #validates_attachment_presence :image
-  validates_attachment_size :image, :less_than => 10.megabytes
-  validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png', 'image/jpg']
-  
-  
-  has_attached_file :document,
-                  :url  => "#{ActionController::Base.relative_url_root}/assets/submissions/:id/:basename.:extension",
-                  :path => ":rails_root/public/assets/submissions/:id/:basename.:extension"
-
-  #validates_attachment_presence :document
-  validates_attachment_size :document, :less_than => 10.megabytes
-  #validates_attachment_content_type :document, :content_type => ['application/pdf', 'application/msword']
 end

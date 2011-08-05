@@ -1,10 +1,41 @@
-<%= render 'layouts/programtop' %>
+<% content_for :head do %>
+	<%= stylesheet_link_tag @program.style_url if @program.style? %>
+<% end %>
 
-<div id="content">
-	<div id="description">
-		<h2>Description:</h2>
-		<%= @program.description %>
-	</div>
+<% title @program.title %>
+
+<% content_for :navbar do %>
+	<%= render 'layouts/navbar' %>
+<% end %>
+
+<%= image_tag @program.logo_url(:thumb) if @program.logo? %>
+
+<h3>Description</h3>
+<%=raw @program.description %>
+
+<h3>Guidelines</h3>
+<%=raw @program.guidelines %>
+
+<p>
+	<strong>Final submissions are due by:</strong> <%= @program.end.strftime('%a, %b %e, %Y') %>
+</p>
+
+<% if can? :update, @program %>
+	<p>
+		<strong>Maximum number of works to submit:</strong> <%= @program.max_work %>
+	</p>
+<% end %>
+
+<div id="program_footer">
+	<h3>Contact</h3>
+	<%=raw @program.contact %>
 </div>
 
-<%= render 'layouts/programbot' %>
+<% if can? :update, @program %>
+	<p>
+	  <%= link_to "Edit Program", edit_program_path(@program) %>
+	  <% if can? :delete, @program %>
+	   | <%= link_to "Destroy Program", @program, :confirm => 'Are you sure?', :method => :delete, :class => 'warning' %>
+	  <% end %>
+	</p>
+<% end %>

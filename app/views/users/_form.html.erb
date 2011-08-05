@@ -1,0 +1,35 @@
+<%= form_for @user, :validate => true do |f| %>
+	<%= f.error_messages %>
+	
+	<p>
+		<%= f.label :email %><br />
+		<%= f.text_field :email %>
+	</p>
+
+	<% if @user.new_record? %>
+		<p>
+			<%= f.label :password %><br />
+			<%= f.password_field :password %>
+		</p>
+
+		<p>
+			<%= f.label :password_confirmation %><br />
+			<%= f.password_field :password_confirmation %>
+		</p>
+	<% end %>
+	
+	<%= f.fields_for :profile do |builder| %>
+		<%= render 'profile_fields', :f => builder %>
+	<% end%>
+	
+	<p>
+		<%= f.label :roles %><br />
+		<% for role in Role.all %>
+			<%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %>
+			<%=h role.name.titleize %><br />
+		<% end %>
+		<div class="instructions">These are instuctions</div>
+	</p>
+
+	<p><%= f.submit %> <%= link_to 'Cancel', :back, :class => 'cancel' %></p>
+<% end %>

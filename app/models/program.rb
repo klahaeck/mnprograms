@@ -1,28 +1,34 @@
 class Program < ActiveRecord::Base
-  #attr_accessible :title, :guidlines, :contact, :logo, :user_id
+  attr_accessible :title, :url, :description, :guidelines, :contact, :thankyou, :start, :end, :published, :max_work, :logo, :style, :editor_ids, :juror_ids, :cached_slug
   
-  validates_presence_of :title
-  validates_presence_of :description
-  #validates_presence_of :guidelines
-  validates_presence_of :contact
-  validates_presence_of :thankyou
+  has_friendly_id :title, :use_slug => true
   
-  validates_uniqueness_of :title
+  validates :title, :presence => true
+  validates :start, :presence => true
+  validates :end, :presence => true
+  # validates :description, :presence => true
+  # validates :guidelines, :presence => true
+  # validates :contact, :presence => true
+  # validates :thankyou, :presence => true
   
-  has_many :jurorships
-  has_many :jurors, :through => :jurorships
+  # validates :url, :presence => true, :uniqueness => true
+  # validates :logo, :presence => true
   
-  has_many :applicants
+  mount_uploader :logo, LogoUploader
+  mount_uploader :style, StyleUploader
   
-  has_friendly_id :title, :use_slug => true,
-    # remove accents and other diacritics from Western characters
-    :approximate_ascii => true
+  scope :default, Program.where(:default => true)
+  scope :published, Program.where(:published => true)
+  scope :unpublished, Program.where(:published => false)
+  scope :active, Program.published.where({:start.lt => Date.today, :end.gt => Date.today})
+  scope :inactive, Program.where({:published => false} | {:start.gt => Date.today} | {:end.lt => Date.today})
   
-  has_attached_file :logo, :styles => { :icon => "20x20>", :small => "50x50>", :medium => "257x257>" },
-                    :url  => "/assets/programs/:id/:basename_:style.:extension",
-                    :path => ":rails_root/public/assets/programs/:id/:basename_:style.:extension"
-
-  validates_attachment_presence :logo
-  validates_attachment_size :logo, :less_than => 1.megabytes
-  validates_attachment_content_type :logo, :content_type => ['image/jpeg', 'image/png', 'image/gif']
+  has_many :editorships, :dependent => :destroy
+  has_many :editors, :through => :editorships, :source => :user, :uniq => true
+  
+  has_many :jurorships, :dependent => :destroy
+  has_many :jurors, :through => :jurorships, :source => :user, :uniq => true
+  
+  has_many :submissions
+  
 end

@@ -1,0 +1,58 @@
+<% content_for :head do %>
+	<%= javascript_include_tag "livevalidation_standalone.compressed" %>
+	<%= javascript_include_tag "submission_form_fields" %>
+	<%= stylesheet_link_tag "/javascripts/fancybox/jquery.fancybox-1.3.4.css" %>
+	<%= javascript_include_tag "fancybox/jquery.fancybox-1.3.4.pack", 'fancybox.config' %>
+<% end %>
+
+<%= form_for [@program, @submission], :html => { :multipart => true } do |f| %>
+  <%= f.error_messages %>
+  
+	<div class="form_section">
+		<h3>Your Info</h3>
+	    <p>
+			<%= f.label :statement %><br />
+	    	<%= f.text_area :statement, :class => 'statement_box' %>
+			<div class="instructions">These are instuctions</div>
+		</p>
+		<p>
+			<% if f.object.new_record? %>
+				<%= f.label :resume %><br />
+	  			<%= f.file_field :resume %> 
+				<%= f.hidden_field :resume_cache %>
+			<% else %>
+				<%= f.label :resume %>
+				<div class="existing_field">
+					<%= link_to(f.object.resume.file.filename, f.object.resume_url) if f.object.resume? %> 
+					<%= link_to 'edit', '#', :id => 'edit_resume_file', :class => 'edit_file' %>
+				</div>
+				<div class="new_field">
+					<%= f.file_field :resume %> 
+					<%= link_to 'cancel', '#', :id => 'cancel_edit', :class => 'cancel_edit' %>
+					<%= f.hidden_field :resume_cache %>
+				</div>
+			<% end %>
+			<div class="instructions">These are instuctions</div>
+		</p>
+	</div>
+	
+	<div class="form_section">
+		<h3>Your Work</h3>
+		<% i = 0 %>
+	    <%= f.fields_for :works do |builder| %>
+			<%= render 'work_fields', :f => builder, :i => i %>
+			<% i += 1 %>
+		<% end %>
+		
+		<!--<% if @program.max_work > 1 %>
+			<%= link_to("Add Work", '#', :id => 'add_work_link') %>
+		<% end %>-->
+		<div class="instructions">These are instuctions</div>
+	</div>
+	
+	<p><%= f.submit %> <%= link_to 'cancel', :back, :class => 'cancel' %> 
+	<% if can? :delete, @submission %>
+		<%= link_to "delete", [@program, :submission], :confirm => 'Are you sure you want to delete your entire submission?', :method => :delete, :class => 'warning delete_button' %>
+	<% end %>
+	</p>
+<% end %>

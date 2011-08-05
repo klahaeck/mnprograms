@@ -1,0 +1,21 @@
+one:
+  user_id: 1
+  firstname: MyString
+  lastname: MyString
+  phone: MyString
+  street1: MyString
+  street2: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+
+two:
+  user_id: 1
+  firstname: MyString
+  lastname: MyString
+  phone: MyString
+  street1: MyString
+  street2: MyString
+  city: MyString
+  state: MyString
+  zip: MyString

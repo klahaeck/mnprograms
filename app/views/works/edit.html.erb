@@ -1,6 +1,12 @@
-<% title "Edit Work" %>
+<% title link_to(@program.title, named_program_path(@program)) %>
 
-<%= render :partial => 'form' %>
+<% content_for :navbar do %>
+	<%= render 'layouts/navbar' %>
+<% end %>
+
+<h3>Add Work</h3>
+
+<%= render 'form' %>
 
 <p>
   <%= link_to "Show", @work %> |

@@ -1,47 +1,42 @@
 class WorksController < ApplicationController
-
-  before_filter :authenticate_admin!, :except => [:new, :create, :index, :show]
-
+  
+  load_resource :submission
+  load_resource :work, :through => :submission, :shallow => true
+  
   def index
-    @works = Work.all
   end
-  
+
   def show
-    @work = Work.find(params[:id])
+    render :layout => 'program'
   end
-  
+
   def new
-    @work = Work.new
+    render :layout => 'program'
   end
-  
+
   def create
-    @work = Work.new(params[:work])
     if @work.save
-      flash[:notice] = "Successfully created work."
-      redirect_to @work
+      redirect_to @work, :notice => "Successfully created work."
     else
       render :action => 'new'
     end
   end
-  
+
   def edit
-    @work = Work.find(params[:id])
+    render :layout => 'program'
   end
-  
+
   def update
-    @work = Work.find(params[:id])
     if @work.update_attributes(params[:work])
-      flash[:notice] = "Successfully updated work."
-      redirect_to @work
+      redirect_to @work, :notice  => "Successfully updated work."
     else
       render :action => 'edit'
     end
   end
-  
+
   def destroy
-    @work = Work.find(params[:id])
     @work.destroy
-    flash[:notice] = "Successfully destroyed work."
-    redirect_to works_url
+    redirect_to works_url, :notice => "Successfully destroyed work."
   end
+  
 end

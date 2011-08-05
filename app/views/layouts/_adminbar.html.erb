@@ -1,0 +1,23 @@
+<% if user_signed_in? && current_user.role?('admin') %>
+	<div id="admin_toolbar">
+	
+		<ul id="admin_tools">
+			<% if can? :create, Program %>
+				<li><%= link_to "New Program", new_program_path %></li>
+			<% end %>
+			<% if can? :create, User %>
+				<li><%= link_to "New User", new_user_path %></li>
+			<% end %>
+		</ul>
+	
+		<ul id="admin_pages">
+			<% if can? :read, @programs %>
+				<li><%= link_to 'Programs', programs_path %></li>
+			<% end %>
+			<% if can? :read, @users %>
+				<li><%= link_to 'Users', users_path %></li>
+			<% end %>
+		</ul>
+	
+	</div>
+<% end %>

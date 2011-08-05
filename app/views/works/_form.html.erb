@@ -1,20 +1,29 @@
-<% form_for @work do |f| %>
-  <%= f.error_messages %>
-  <p>
-    <%= f.label :submission_id %><br />
-    <%= f.text_field :submission_id %>
-  </p>
-  <p>
-    <%= f.label :type_id %><br />
-    <%= f.text_field :type_id %>
-  </p>
-  <p>
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :url %><br />
-    <%= f.text_field :url %>
-  </p>
-  <p><%= f.submit %></p>
+<%= form_for [@submission, @work], :html => { :multipart => true }, :validate => true do |f| %>
+	<%= f.error_messages %>
+	
+	<%= f.hidden_field :submission_id, :value => @submission.id %>
+
+	<div class="work_type">
+		<%= f.label :type_id, "Type" %> 
+		<%= f.collection_select :type_id, Type.all, :id, :title %>
+	</div>
+	
+	<div class="work_title">
+		<%= f.label :title %> 
+		<%= f.text_field :title %>
+	</div>
+
+	<div class="work_link">
+		<%= f.label :link %> 
+		<%= f.text_field :link %>
+	</div>
+
+	<div class="work_image">
+		<%= f.label :image %> 
+		<%= f.file_field :image %>
+		<%= f.hidden_field :image_cache %>
+	</div>
+	
+	<p><%= f.submit %></p>
+	
 <% end %>

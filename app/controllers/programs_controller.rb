@@ -1,86 +1,123 @@
 class ProgramsController < ApplicationController
-
-  before_filter :authenticate_admin!, :except => [:thankyou, :guidelines, :index, :show]
- 
+  #include ProgramsHelper
+  
+  load_and_authorize_resource :except => [:index]
+  
   def index
-    @programs = Program.all
-    @jurors = Juror.all
+    @programs = Program.page(params[:page])
+    # authorize! :read, @programs
   end
-  
+
   def show
-    @program = Program.find(params[:id])
-    
-    if @program.published == true || user_signed_in?
-	    respond_to do |format|
-	       format.html
-	    end
+=begin    if params[:url]
+      @program = Program.find_by_url(params[:url])
     else
-    	flash[:notice] = "The program you've selected cannot be found."
-    	redirect_to programs_url
+      @program = Program.find(params[:id])
     end
+    authorize! :read, @program
+    if @program
+      render :layout => 'program'
+    else
+      # redirect_to root_url, :flash => "We cannot find the site you are looking for"
+      render_404
+    end
+=end
+    render :layout => 'program'
   end
-  
+
   def new
-  	@jurors = Juror.all
-    @program = Program.new
   end
-  
+
   def create
-    @program = Program.new(params[:program])
     if @program.save
-      flash[:notice] = "Successfully created program."
-      redirect_to @program
+      redirect_to @program, :notice => "Successfully created program."
     else
       render :action => 'new'
     end
   end
-  
+
   def edit
-  	@jurors = Juror.all
-    @program = Program.find(params[:id])
   end
-  
+
   def update
-    @program = Program.find(params[:id])
+    if not params[:program][:juror_ids]
+      @program.juror_ids = ""
+    end
+    if not params[:program][:editor_ids]
+      @program.editor_ids = ""
+    end
     if @program.update_attributes(params[:program])
-      flash[:notice] = "Successfully updated program."
-      redirect_to @program
+      redirect_to @program, :notice  => "Successfully updated program."
     else
       render :action => 'edit'
     end
   end
-  
+
   def destroy
-    @program = Program.find(params[:id])
     @program.destroy
-    flash[:notice] = "Successfully destroyed program."
-    redirect_to programs_url
+    redirect_to programs_url, :notice => "Successfully destroyed program."
+  end
+  
+  def set_default
+    defaults = Program.default
+    for default in defaults do
+      default.update_attribute :default, false
+    end
+    
+    @program = Program.find(params[:id])
+    @program.update_attribute :default, true
+    redirect_to programs_url, :notice => "Successfully set default program."
   end
   
   def guidelines
-  	@program = Program.find(params[:id])
-  	
-  	if @program.published == true || user_signed_in?
-	    respond_to do |format|
-	       format.html
-	    end
-	else
-		flash[:notice] = "The program you've selected cannot be found."
-    	redirect_to programs_url
+=begin    if params[:url]
+      @program = Program.find_by_url(params[:url])
+    else
+      @program = Program.find(params[:id])
     end
+    authorize! :guidelines, @program
+    if @program
+      render :layout => 'program'
+    else
+      # redirect_to root_url, :flash => "We cannot find the site you are looking for"
+      render_404
+    end
+=end
+    render :layout => 'program'
+  end
+  
+  def description
+=begin    if params[:url]
+      @program = Program.find_by_url(params[:url])
+    else
+      @program = Program.find(params[:id])
+    end
+    authorize! :description, @program
+    if @program
+      render :layout => 'program'
+    else
+      # redirect_to root_url, :flash => "We cannot find the site you are looking for"
+      render_404
+   end
+=end
+    render :layout => 'program'
   end
   
   def thankyou
-  	@program = Program.find(params[:id])
-  	
-  	if @program.published == true || user_signed_in?
-	    respond_to do |format|
-	       format.html
-	    end
-	else
-		flash[:notice] = "The program you've selected cannot be found."
-    	redirect_to programs_url
+=begin    if params[:url]
+      @program = Program.find_by_url(params[:url])
+    else
+      @program = Program.find(params[:id])
     end
+    authorize! :thankyou, @program
+    if @program
+      render :layout => 'program'
+    else
+      # redirect_to root_url, :flash => "We cannot find the site you are looking for"
+      render_404
+    end
+=end
+    render :layout => 'program'
   end
   
 end

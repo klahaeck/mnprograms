@@ -1,54 +1,96 @@
 <% content_for :head do %>
-	<%= javascript_include_tag 'ckeditor/ckeditor.js' %>
+	<%= stylesheet_link_tag "ui.multiselect" %>
+	
+	<%= javascript_include_tag "date_popups" %>
+	<%= javascript_include_tag "ui.multiselect" %>
+	<%= javascript_include_tag "ui.multiselect.config" %>
+	<%= javascript_include_tag "ui.multiselect" %>
+	<%= javascript_include_tag :ckeditor %>
 <% end %>
 
-<% form_for @program, :html => { :multipart => true } do |f| %>
-
+<%= form_for @program, :html => {:multipart => true}, :validate => false do |f| %>
   <%= f.error_messages %>
-  
-  <div id="usersform">
-  	<%= f.label :jurors %>:<br />
-  	<span class="instructions">You may select multiple jurors.</span><br />
-  	<%= select_tag "program[juror_ids][]", options_from_collection_for_select(Juror.all, "id", "name"), :multiple => true, :size => 2 %><br />
-  	<%= link_to "Add Juror", new_juror_path %>
-  </div>
-  
-  <p>
-  	<%= f.label :title %>:
-  	<% if @program.title %>
-  		<%= @program.title %>
-    <% else %>
-    	<%= f.text_field :title %>
-    <% end %> 
-    <%= f.label :published %>: 
-    <%= f.check_box :published %>
-  </p>
-  <p>
-    <%= f.label :logo %>: 
-    <%= f.file_field :logo %>
-  </p>
-  <p>
-  	<%= f.label :start %>: 
-  	<%= f.date_select :start %> | 
-	<%= f.label :end %>: 
-  	<%= f.date_select :end %>
-  </p>
-  <p>
-  	<%= f.label :description %>:<br />
-  	<%= f.cktext_area :description, :toolbar=>'Full', :width=>'900px', :heigth=>'100px' %>
-  </p>
-  <p>
-    <%= f.label :guidlines %>:<br />
-    <%= f.cktext_area :guidlines, :toolbar=>'Full', :width=>'900px', :heigth=>'100px' %>
-  </p>
-  <p>
-    <%= f.label :contact %>:<br />
-    <%= f.cktext_area :contact, :toolbar=>'Full', :width=>'900px', :heigth=>'100px' %>
-  </p>
-  <p>
-    <%= f.label :thankyou %>:<br />
-    <%= f.cktext_area :thankyou, :toolbar=>'Full', :width=>'900px', :heigth=>'100px' %>
-  </p>
-  
-  <p><%= f.submit %></p>
+	
+	<div class="form_section">
+		<h3>Name</h3>
+		<div class='form_block'>
+			<%= f.label :title %><br />
+			<%= f.text_field :title %>
+		</div>
+		<!--<div class='form_block'>
+		  <%= f.label :url %><br />
+		  <%= f.text_field :url %>
+		</div>-->
+		<div class="instructions">These are instuctions</div>
+	</div>
+	
+	<div class="form_section">
+		<h3>Settings</h3>
+		<div class='form_block'>
+			<%= f.label :start, "Start Date" %><br />
+			<%= f.text_field :start, :id => 'program_start_popup' %>
+		</div>
+		<div class='form_block'>
+			<%= f.label :end, "End Date" %><br />
+			<%= f.text_field :end, :default => Date.today + 30.days, :id => 'program_end_popup' %>
+		</div>
+		<div class='form_block'>
+			<%= f.label :published %><br />
+			<%= f.check_box :published %>
+		</div>
+		<div class='form_block'>
+			<%= f.label :max_work %><br />
+			<%= f.select :max_work, 1..15 %>
+		</div>
+		<div class="instructions">These are instuctions</div>
+	</div>
+	
+	<div class="form_section">
+		<h3>People</h3>
+		<div class='form_block'>
+			<%= f.label :editor_ids, "Editors" %><br />
+			<%= f.collection_select :editor_ids, User.editors, :id, :email, {}, {:multiple => true, :class => 'user_select'} %><br />
+		</div>
+		<div class='form_block'>
+			<%= f.label :juror_ids, "Jurors" %><br />
+			<%= f.collection_select :juror_ids, User.jurors, :id, :email, {}, {:multiple => true, :class => 'user_select'} %><br />
+		</div>
+		<div class="instructions">These are instuctions</div>
+	</div>
+	
+	<div class="form_section">
+		<h3>Appearance</h3>
+		<div class='form_block'>
+			<%= f.label :logo %><br />
+			<%= f.file_field :logo %>
+		</div>
+		<div class='form_block'>
+			<%= f.label :style, 'Stylesheet' %><br />
+			<%= f.file_field :style %>
+		</div>
+		<div class="instructions">These are instuctions</div>
+	</div>
+	
+	<div class="form_section">
+		<h3>Messaging</h3>
+		<div class='form_block'>
+			<%= f.label :description %><br />
+			<%= f.cktext_area :description, :toolbar => 'Full', :width => '900px', :height => '200px' %>
+		</div>
+		<div class='form_block'>
+			<%= f.label :guidelines %><br />
+			<%= f.cktext_area :guidelines, :toolbar => 'Full', :width => '900px', :height => '200px' %>
+		</div>
+		<div class='form_block'>
+			<%= f.label :contact %><br />
+			<%= f.cktext_area :contact, :toolbar => 'Basic', :width => '900px', :height => '200px' %>
+		</div>
+		<div class='form_block'>
+			<%= f.label :thankyou %><br />
+			<%= f.cktext_area :thankyou, :toolbar => 'Full', :width => '900px', :height => '200px' %>
+		</div>
+		<div class="instructions">These are instuctions</div>
+	</div>
+	
+	<p><%= f.submit %> <%= link_to 'Cancel', :back, :class => 'cancel' %></p>
 <% end %>

@@ -1,0 +1,50 @@
+<% title "Profile" %>
+
+<p>
+  <strong>User:</strong>
+  <%= @profile.user.email %>
+</p>
+<p>
+  <strong>Firstname:</strong>
+  <%= @profile.firstname %>
+</p>
+<p>
+  <strong>Lastname:</strong>
+  <%= @profile.lastname %>
+</p>
+<p>
+  <strong>Phone:</strong>
+  <%= @profile.phone %>
+</p>
+<p>
+  <strong>Street1:</strong>
+  <%= @profile.street1 %>
+</p>
+<p>
+  <strong>Street2:</strong>
+  <%= @profile.street2 %>
+</p>
+<p>
+  <strong>City:</strong>
+  <%= @profile.city %>
+</p>
+<p>
+  <strong>State:</strong>
+  <%= @profile.state %>
+</p>
+<p>
+  <strong>Zip:</strong>
+  <%= @profile.zip %>
+</p>
+
+<% if can? :update, @profile %>
+	<p>
+	  <%= link_to "Edit", edit_profile_path(@profile) %> |
+	  <% if can? :update, @profile %>
+		<%= link_to "Destroy", @profile, :confirm => 'Are you sure?', :method => :delete %> |
+	  <% end %>
+	  <% if can? :read, Profile %>
+	  	<%= link_to "View All", profiles_path %>
+	  <% end %>
+	</p>
+<% end %>

@@ -1,63 +1,61 @@
-<% content_for :head do %>
-	<title>Programs</title>
-<% end %>
+<% title APP_CONFIG['site_name'] %>
 
-<h1>Programs</h1>
-
-<table width="100%">
-	<th></th>
-	<th></th>
-	<th align="left">start date</th>
-	<th align="left">end date</th>
-	<% if admin_signed_in? %>
-		<th align="left">Published</th>
-		<th align="left">jurors</th>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Start</th>
+    <th>End</th>
+	<% if user_signed_in? && current_user.role?('admin') %>
+    	<th>Published</th>
 	<% end %>
-	<% for program in @programs %>
-		<% if program.published == true || admin_signed_in? || juror_signed_in? %>
-		    <tr align="left" valign="top" class="tablerow_<%= cycle("even", "odd") %>">
-		      <td width="50px"><%= link_to image_tag(program.logo.url(:icon)), program %></td>
-		      <td><strong><%=h link_to program.title, program %></strong></td>
-		      <td><%=h program.start.strftime('%m/%d/%Y') %></td>
-		      <td><%=h program.end.strftime('%m/%d/%Y') %></td>
-		      <% if admin_signed_in? %>
-	      			<td>
-	      				<%= program.published %>
-	      			</td>
-					<td>
-						<% for juror in program.jurors %>
-							<%=h juror.name %>
-						<% end %>
-					</td>
-		      <% end %>
-				<% if admin_signed_in? %>
-					<td width="150px">
-						<div class="editcontrols">
-							<%= link_to "Show", program %> | 
-							<%= link_to "Edit", edit_program_path(program) %> | 
-							<%= link_to "Destroy", program, :confirm => 'Are you sure?', :method => :delete, :class => 'caution' %>
-						</div> 
-					</td>
-				<% elsif juror_signed_in? %>
-					<td width="150px">
-						<div class="editcontrols">
-							<% if current_juror.programs.include?(program) %>
-								<%=h link_to "View Applicants", program_applicants_path(program) %>
-							<% end %>
-						</div>
-					</td>
-				<% else %>
-					<td width="150px">
-						<div class="editcontrols">
-							<%=h link_to "Apply", program %>
-						</div>
-					</td>
-				<% end %>
-		    </tr>
-	    <% end %>
-  	<% end %>
+	<% if can? :read, Jurorship %>
+		<th>Jurors</th>
+	<% end %>
+	<% if can? :read, Editorship %>
+		<th>Editors</th>
+	<% end %>
+	<!--<th>Default</th>-->
+  </tr>
+  <% for program in @programs %>
+    <% if can? :read, program %>
+		<tr>
+	      <td><%= link_to program.title, program %></td>
+	      <td><%= program.start.strftime('%a, %b %e, %Y') %></td>
+	      <td><%= program.end.strftime('%a, %b %e, %Y') %></td>
+		  <% if user_signed_in? && current_user.role?('admin') %>
+	      	<td><span class="<%= program.published %>"><%= program.published %></span></td>
+		  <% end %>
+		  <!--<td><%= program.default %></td>-->
+		  <% if can? :read, Jurorship %>
+			<td>
+				<ul>
+					<% for juror in program.jurors %>
+						<li><%= juror.fullname %></li>
+					<% end %>
+				</ul>
+			</td>
+		  <% end %>
+		  <% if can? :read, Editorship %>
+			<td>
+				<ul>
+					<% for editor in program.editors %>
+						<li><%= editor.fullname %></li>
+					<% end %>
+				</ul>
+			</td>
+		  <% end %>
+	      <td>
+		      <% if can? :update, program %>
+				<!--<%= link_to "Make Default", set_default_program_path(program), :method => :put %> | -->
+			  	<%= link_to "Edit", edit_program_path(program) %>
+			  <% end %>
+			  <% if can? :delete, program %>
+		      	| <%= link_to "Destroy", program, :confirm => 'Are you sure?', :method => :delete, :class => 'warning' %>
+			  <% end %>
+		  </td>
+	    </tr>
+	<% end %>
+  <% end %>
 </table>
 
-<% if admin_signed_in? %>
-	<p><%= button_to "New Program", new_program_path %></p>
-<% end %>
+<%= paginate @programs %>

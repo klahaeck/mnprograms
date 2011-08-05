@@ -1,16 +1,17 @@
 class Submission < ActiveRecord::Base
-  #attr_accessible :applicant_id, :statement, :submission_id, :type_id, :title, :url, :image, :resume
+  attr_accessible :user_id, :program_id, :statement, :resume, :resume_cache, :works_attributes
   
-  belongs_to :applicant
+  ajaxful_rateable :stars => 5, :allow_update => true
+  
+  mount_uploader :resume, ResumeUploader
+  
+  belongs_to :user
+  belongs_to :program
+  
   has_many :works, :dependent => :destroy
+  accepts_nested_attributes_for :works, :reject_if => lambda { |a| a[:title].blank? }, :allow_destroy => true
   
-  has_attached_file :resume,
-                  :url  => "#{ActionController::Base.relative_url_root}/assets/submissions/:id/:basename.:extension",
-                  :path => ":rails_root/public/assets/submissions/:id/:basename.:extension"
-
-  #validates_attachment_presence :resume
-  validates_attachment_size :resume, :less_than => 10.megabytes
-  #validates_attachment_content_type :resume, :content_type => ['application/pdf', 'application/msword']
+  validates :statement, :presence => true
+  validates :resume, :presence => true
   
-  accepts_nested_attributes_for :works, :reject_if => lambda { |a| a[:title].blank? }
 end

@@ -1,0 +1,25 @@
+<% title "User" %>
+
+<p>
+  <strong>Email:</strong>
+  <%=h @user.email %>
+</p>
+
+<%= render 'profile' %>
+
+<p>
+  <strong>Roles:</strong>
+  <% for role in @user.roles %>
+    <%=h role.name.humanize %><br />
+  <% end %>
+</p>
+
+<p>
+	<% if can? :update, @user %>
+  		<%= link_to "Edit", edit_user_path(@user) %>
+ 	<% end %>
+	<% if can? :delete, @user %>
+		 | <%= link_to "Destroy", @user, :confirm => 'Are you sure?', :method => :delete, :class => 'warning' %>
+	<% end %>
+  	 | <%= link_to "View All Users", users_path %>
+</p>
