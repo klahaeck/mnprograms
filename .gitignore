@@ -3,3 +3,5 @@ log/*
 public/assets/programs/*
 public/assets/submissions/*
 DESIGN/
+tmp/nonces/*
+tmp/cache/*
