@@ -10,6 +10,10 @@
 
 <%= image_tag @program.logo_url(:thumb) if @program.logo? %>
 
+<% if @program.end < Date.today %>
+	<p>We're sorry, submissions are no longer being accepted for this program.</p>
+<% end %>
+
 <h3>Description</h3>
 <%=raw @program.description %>
 
