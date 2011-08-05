@@ -249,6 +249,7 @@ tr {
 	cursor: pointer;
 }
 
+.warning,
 a.warning {
 	color: red;
 }

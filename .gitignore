@@ -3,9 +3,6 @@ log/*
 public/assets/programs/*
 public/assets/submissions/*
 DESIGN/
-<<<<<<< Updated upstream
 tmp/nonces/*
 tmp/cache/*
-=======
-tmp/nonces/*
->>>>>>> Stashed changes
+tmp/pid/*
