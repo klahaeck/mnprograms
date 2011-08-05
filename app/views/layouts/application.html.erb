@@ -12,17 +12,7 @@
   <body>
     <div id="container">
 		
-		<div id="user_nav">
-			<% if user_signed_in? %>
-				Signed in as <%= link_to current_user.email, edit_user_registration_path(current_user) %> | 
-				<%= link_to "Profile", edit_profile_path(current_user.profile) %> | 
-				<%= link_to "Sign out", destroy_user_session_path %>
-			<% else %>
-				<%= link_to "Sign up", new_user_registration_path %> | <%= link_to "Sign in", new_user_session_path %> or Sign in via: 
-				<a href="/auth/google" class="services"><%= image_tag "service_icons/google_32.png", :size => "32x32",  :alt => "Google" %></a>
-				<a href="/auth/facebook" class="services"><%= image_tag "service_icons/facebook_32.png", :size => "32x32",  :alt => "Facebook" %></a>
-			<% end %>
-		</div>
+		<%= render 'layouts/loginbar' %>
 		
 		<div id="header">
 			<% if show_title? %>
