@@ -1,7 +1,6 @@
 log/*
-public/assets/programs/*
-public/assets/submissions/*
-DESIGN/
-tmp/nonces/*
-tmp/cache/*
-tmp/pid/*
+public/assets
+public/uploads
+tmp/*
+config/database.yml
+config/config.yml

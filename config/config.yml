@@ -1,16 +1,17 @@
-defaults: &defaults
-    site_name: MN Programs
-
-development:
-    <<: *defaults
-    facebook_app_id: 157733777613019
-    facebook_app_secret: 1bb826ff2ddba27f563d39d8f8c5a7df
+development: &default
+  site_name: MN Programs
+  facebook_app_id: 157733777613019
+  facebook_app_secret: 1bb826ff2ddba27f563d39d8f8c5a7df
+  smtp_domain: klahaeck.com
+  smtp_username: kla.haeck
+  smtp_password: Saturn1!
+  mail_interceptor: kla.haeck@gmail.com
 
 test:
-    <<: *defaults
-    <<: *development
+  <<: *default
 
 production:
-    <<: *defaults
-    facebook_app_id: 187685144603312
-    facebook_app_secret: f1c6e91c60ba94a937b8ce2fcd3099d4
+  <<: *default
+  facebook_app_id: 187685144603312
+  facebook_app_secret: f1c6e91c60ba94a937b8ce2fcd3099d4
+  mail_interceptor: jehra.patrick@gmail.com
